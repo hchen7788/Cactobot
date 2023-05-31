@@ -48,9 +48,23 @@ class tkinterApp(tk.Tk):
         frame = self.frames[cont]
         frame.tkraise()
 
+
 # Driver Code
 app = tkinterApp()
 app.title("Cactobot")
+# app.geometry("1200x400")
+# # app['background'] = 'green'
+# # app.configure(bg="green")
+
+# app.configure(background='green')
+# # style configuration
+# style = ttk.Style(app)
+# style.configure(bg="green")
+# style.configure('TLabel', background='black', foreground='black')
+# style.configure('TFrame', background='black')
+
+new_task = tk.StringVar()
+
 app.mainloop()
 
 
