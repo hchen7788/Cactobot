@@ -5,6 +5,7 @@ from setting import settingsPage
 from task import tasksPage
  
 LARGEFONT =("Verdana", 35)
+
   
 class tkinterApp(tk.Tk):
      
@@ -49,8 +50,6 @@ class tkinterApp(tk.Tk):
 app = tkinterApp()
 app.title("Cactobot")
 app.mainloop()
-
-# import tkinter as tk
 
 
 # ## functions to use

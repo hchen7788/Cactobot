@@ -13,18 +13,18 @@ class tasksPage(tk.Frame):
   
         # button to show frame 2 with text
         # layout2
-        button1 = ttk.Button(self, text ="Settings",
+        settingBtn = ttk.Button(self, text ="Settings",
                             command = lambda : controller.show_frame(setting.settingsPage))
      
         # putting the button in its place by
         # using grid
-        button1.grid(row = 1, column = 1, padx = 10, pady = 10)
+        settingBtn.grid(row = 9, column = 1, padx = 10, pady = 10)
   
         # button to show frame 3 with text
         # layout3
-        button2 = ttk.Button(self, text ="Home",
+        homeBtn = ttk.Button(self, text ="Home",
                             command = lambda : controller.show_frame(home.homePage))
      
         # putting the button in its place by
         # using grid
-        button2.grid(row = 2, column = 1, padx = 10, pady = 10)
+        homeBtn.grid(row = 9, column = 5, padx = 10, pady = 10)
