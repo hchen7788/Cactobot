@@ -21,11 +21,20 @@ class tasksPage(tk.Frame):
         input = tk.StringVar()
 
         # helpful functions
+        def displayList():
+            c = 2
+            for item in taskList:
+                label = ttk.Label(self, text = item, font = MEDIUMFONT)
+                label.grid(row = c, column = 5, padx = 10, pady = 10)
+                c += 1
+        
         def addTasks():
             entryText = input.get()
             taskList.append(entryText)
+            input.set("")
             global listCount
             listCount += 1
+            displayList()
 
         # running program starts here
         tk.Frame.__init__(self, parent)
@@ -43,11 +52,7 @@ class tasksPage(tk.Frame):
         label.grid(row = 1, column = 5, padx = 10, pady = 10)
 
         # lay out default checklist items
-        c = 2
-        for item in taskList:
-            label = ttk.Label(self, text = item, font = MEDIUMFONT)
-            label.grid(row = c, column = 5, padx = 10, pady = 10)
-            c += 1
+        displayList()
 
         # putting help button to link to help page
         helpBtn = ttk.Button(self, text = "HELP",
