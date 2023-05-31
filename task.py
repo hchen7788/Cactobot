@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from functools import partial
 
 import home
 import setting
@@ -9,7 +10,7 @@ LARGEFONT =("Verdana", 35)
 MEDIUMFONT =("Verdana", 25)
 
 taskList = ["Brush your teeth", "Wash your face", "Take medication", "Eat and hydrate"]
-deleteList = ["Brush your teeth", "Wash your face", "Take medication", "Eat and hydrate"]
+deleteList = []
 checkCount = 0
 listCount = len(taskList)
 
@@ -32,36 +33,37 @@ class tasksPage(tk.Frame):
                     return child
             return None
         
-        def checkItem():
+        def checkItem(r):
             global checkCount
             checkCount += 1
-            print("item checked")
+            # TODO: @TANIA @ ANNA send signal to output for one item checked
+            print("item ", r, " checked")
             if(checkCount == listCount):
-                # TODO: @TANIA @ANNA send signal to output
-                print("Congrats!")
+                # TODO: @TANIA @ANNA send signal to output for all items checked
+                print("All tasks complete. Congrats!")
         
-        def deleteItem(text):
+        def deleteItem(r):
             # print("item deleted")
             # print(self.grid_info()['row'])
             # print(self.grid_info()['column'])
-            print(text, " is going to be deleted")
+            print("task ", r, " is going to be deleted")
             
-        
         def displayList():
-            c = 2
+            r = 2
             for item in taskList:
                 label = ttk.Label(self, text = item, font = MEDIUMFONT)
-                label.grid(row = c, column = 5, padx = 10, pady = 10)
+                label.grid(row = r, column = 5, padx = 10, pady = 10)
 
                 # add done button to the left
-                doneBtn = ttk.Button(self, text = "DONE", command = checkItem)
-                doneBtn.grid(row = c, column = 4, padx = 10, pady = 10)
+                doneBtn = ttk.Button(self, text = "DONE", command = partial(checkItem, r - 2))
+                doneBtn.grid(row = r, column = 4, padx = 10, pady = 10)
 
                 # add delete button to the right
-                deleteBtn = ttk.Button(self, text = "DELETE",
-                                       command = lambda: deleteItem(label.cget("text")))
-                deleteBtn.grid(row = c, column = 6, padx = 10, pady = 10)
-                c += 1
+                deleteBtn = ttk.Button(self, text = "DELETE", command = partial(deleteItem, r - 2))
+                deleteBtn.grid(row = r, column = 6, padx = 10, pady = 10)
+                deleteList.append(deleteBtn)
+                print(deleteList)
+                r += 1
         
         def addTasks():
             entryText = input.get()
