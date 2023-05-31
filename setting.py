@@ -8,23 +8,37 @@ import help
 LARGEFONT =("Verdana", 35)
 MEDIUMFONT =("Verdana", 25)
 
-def changeLightColor():
-    # TODO
-    print("change light color here")
+# def changeLightColor():
+#     # TODO
+#     print("change light color here")
 
-def changeMusic():
-    # TODO
-    print("change music here")
+# def changeMusic():
+#     # TODO
+#     print("change music here")
 
-def changeVolumeLevel():
-    # TODO
-    print("change volume level here")
+# def changeVolumeLevel():
+#     # TODO
+#     print("change volume level here")
 
 # settings page window
 class settingsPage(tk.Frame):
      
     def __init__(self, parent, controller):
-         
+        # helpful functions
+        def changeLightColor():
+            # TODO
+            print("change light color here")
+
+        def changeMusic():
+            # TODO
+            print("change music here")
+
+        def changeVolumeLevel():
+            # TODO
+            print("change volume level here")
+        
+        
+        # running program starts here
         tk.Frame.__init__(self, parent)
         label = ttk.Label(self, text ="Settings", font = LARGEFONT)
         label.grid(row = 1, column = 5, padx = 10, pady = 10)
