@@ -9,6 +9,7 @@ LARGEFONT =("Verdana", 35)
 MEDIUMFONT =("Verdana", 25)
 
 taskList = ["Brush your teeth", "Wash your face", "Take medication", "Eat and hydrate"]
+deleteList = ["Brush your teeth", "Wash your face", "Take medication", "Eat and hydrate"]
 checkCount = 0
 listCount = len(taskList)
 
@@ -21,6 +22,16 @@ class tasksPage(tk.Frame):
         input = tk.StringVar()
 
         # helpful functions
+        def find_widget(x,y):
+            for child in self.children.values():
+                x1 = child.winfo_rootx()-self.winfo_rootx()
+                y1 = child.winfo_rooty()-self.winfo_rooty()
+                x2 = x1+ child.winfo_width()
+                y2 = y1+ child.winfo_height()
+                if x1 <= x <= x2 and y1 <= y <= y2:
+                    return child
+            return None
+        
         def checkItem():
             global checkCount
             checkCount += 1
@@ -29,14 +40,27 @@ class tasksPage(tk.Frame):
                 # TODO: @TANIA @ANNA send signal to output
                 print("Congrats!")
         
-
+        def deleteItem(text):
+            # print("item deleted")
+            # print(self.grid_info()['row'])
+            # print(self.grid_info()['column'])
+            print(text, " is going to be deleted")
+            
+        
         def displayList():
             c = 2
             for item in taskList:
                 label = ttk.Label(self, text = item, font = MEDIUMFONT)
                 label.grid(row = c, column = 5, padx = 10, pady = 10)
+
+                # add done button to the left
                 doneBtn = ttk.Button(self, text = "DONE", command = checkItem)
                 doneBtn.grid(row = c, column = 4, padx = 10, pady = 10)
+
+                # add delete button to the right
+                deleteBtn = ttk.Button(self, text = "DELETE",
+                                       command = lambda: deleteItem(label.cget("text")))
+                deleteBtn.grid(row = c, column = 6, padx = 10, pady = 10)
                 c += 1
         
         def addTasks():
