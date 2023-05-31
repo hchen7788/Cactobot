@@ -28,15 +28,6 @@ class helpPage(tk.Frame):
         # putting the grid in its place by using grid
         label.grid(row = 1, column = 4, padx = 10, pady = 10)
 
-        # label of frame Layout 2
-        label = ttk.Label(self, text ="Let's take a look at today's tasks", font = MEDIUMFONT)
-        # putting the grid in its place by using
-        label.grid(row = 2, column = 4, padx = 10, pady = 10)
-
-
-        # addBtn = ttk.Button(self, text="Add Tasks", command=addTasks)
-        # addBtn.grid(row = 2, column = 4, padx = 10, pady = 10)
-
         # putting help button to link to help page
         helpBtn = ttk.Button(self, text = "HELP",
                              command = lambda : controller.show_frame(helpPage))
