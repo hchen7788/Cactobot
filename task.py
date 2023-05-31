@@ -30,6 +30,8 @@ class tasksPage(tk.Frame):
         
         def addTasks():
             entryText = input.get()
+            if(entryText == ""):
+                return
             taskList.append(entryText)
             input.set("")
             global listCount
