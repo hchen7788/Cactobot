@@ -1,20 +1,19 @@
 import tkinter as tk
 from tkinter import ttk
 
-import home
 import setting
-import help
+import task
+import home
 
 LARGEFONT =("Verdana", 35)
 MEDIUMFONT =("Verdana", 25)
 
-# tasks page window
-class tasksPage(tk.Frame):
+# first window frame startpage
+class helpPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = ttk.Label(self, text ="Here are today's tasks", font = LARGEFONT)
-        label.grid(row = 0, column = 4, padx = 10, pady = 10)
-  
+        
+     
         # putting the home and settings button
         homeBtn = ttk.Button(self, text="HOME",
                              command = lambda : controller.show_frame(home.homePage))
@@ -23,8 +22,22 @@ class tasksPage(tk.Frame):
         settingBtn = ttk.Button(self, text ="SETTINGS",
                                 command = lambda : controller.show_frame(setting.settingsPage))
         settingBtn.grid(row = 0, column = 10, padx = 10, pady = 10)
+  
+        # label of header
+        label = ttk.Label(self, text ="Here's how to use your Catcobot", font = LARGEFONT)
+        # putting the grid in its place by using grid
+        label.grid(row = 1, column = 4, padx = 10, pady = 10)
+
+        # label of frame Layout 2
+        label = ttk.Label(self, text ="Let's take a look at today's tasks", font = MEDIUMFONT)
+        # putting the grid in its place by using
+        label.grid(row = 2, column = 4, padx = 10, pady = 10)
+
+
+        # addBtn = ttk.Button(self, text="Add Tasks", command=addTasks)
+        # addBtn.grid(row = 2, column = 4, padx = 10, pady = 10)
 
         # putting help button to link to help page
         helpBtn = ttk.Button(self, text = "HELP",
-                             command = lambda : controller.show_frame(help.helpPage))
+                             command = lambda : controller.show_frame(helpPage))
         helpBtn.grid(row = 9, column = 10, padx = 10, pady = 10)

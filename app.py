@@ -3,8 +3,10 @@ from tkinter import ttk
 from home import homePage
 from setting import settingsPage
 from task import tasksPage
+from help import helpPage
  
 LARGEFONT =("Verdana", 35)
+MEDIUMFONT =("Verdana", 25)
 
   
 class tkinterApp(tk.Tk):
@@ -27,7 +29,7 @@ class tkinterApp(tk.Tk):
   
         # iterating through a tuple consisting
         # of the different page layouts
-        for F in (homePage, settingsPage, tasksPage):
+        for F in (homePage, settingsPage, tasksPage, helpPage):
   
             frame = F(container, self)
   
