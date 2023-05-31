@@ -21,11 +21,22 @@ class tasksPage(tk.Frame):
         input = tk.StringVar()
 
         # helpful functions
+        def checkItem():
+            global checkCount
+            checkCount += 1
+            print("item checked")
+            if(checkCount == listCount):
+                # TODO: @TANIA @ANNA send signal to output
+                print("Congrats!")
+        
+
         def displayList():
             c = 2
             for item in taskList:
                 label = ttk.Label(self, text = item, font = MEDIUMFONT)
                 label.grid(row = c, column = 5, padx = 10, pady = 10)
+                doneBtn = ttk.Button(self, text = "DONE", command = checkItem)
+                doneBtn.grid(row = c, column = 4, padx = 10, pady = 10)
                 c += 1
         
         def addTasks():
@@ -66,3 +77,9 @@ class tasksPage(tk.Frame):
 
         addBtn = ttk.Button(self, text = "Add Task", command = addTasks)
         addBtn.grid(row = 8, column = 5, padx = 10, pady = 10)
+
+        # s = ttk.Style()                                                                 
+        # s.configure('Red.TCheckbutton', indicatorforeground="green", font = ('calibri', 10, 'bold', 'underline'),
+        #         foreground = 'red')         
+        # cb = ttk.Checkbutton(master=self, style='Red.TCheckbutton', text='Test')         
+        # cb.grid(row =11, column = 5, padx = 10, pady = 10) 
