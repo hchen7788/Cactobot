@@ -8,17 +8,6 @@ import help
 LARGEFONT =("Verdana", 35)
 MEDIUMFONT =("Verdana", 25)
 
-# def changeLightColor():
-#     # TODO
-#     print("change light color here")
-
-# def changeMusic():
-#     # TODO
-#     print("change music here")
-
-# def changeVolumeLevel():
-#     # TODO
-#     print("change volume level here")
 
 # settings page window
 class settingsPage(tk.Frame):

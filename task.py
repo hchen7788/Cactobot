@@ -8,21 +8,26 @@ import help
 LARGEFONT =("Verdana", 35)
 MEDIUMFONT =("Verdana", 25)
 
-TASKLIST = ["Brush your teeth", "Wash your face", "Take medication", "Eat and hydrate"]
-CHECKCOUNT = 0
-LISTCOUNT = len(TASKLIST)
+taskList = ["Brush your teeth", "Wash your face", "Take medication", "Eat and hydrate"]
+checkCount = 0
+listCount = len(taskList)
 
-def addTasks():
-    # global LISTCOUNT
-    # LISTCOUNT += 1
-    entryText = tasksPage.entry.get()
-    print("hi")
-    print(entryText)
 
 # tasks page window
 class tasksPage(tk.Frame):
 
     def __init__(self, parent, controller):
+        # variables
+        input = tk.StringVar()
+
+        # helpful functions
+        def addTasks():
+            entryText = input.get()
+            taskList.append(entryText)
+            global listCount
+            listCount += 1
+
+        # running program starts here
         tk.Frame.__init__(self, parent)
         # putting the home and settings button
         homeBtn = ttk.Button(self, text="HOME",
@@ -39,7 +44,7 @@ class tasksPage(tk.Frame):
 
         # lay out default checklist items
         c = 2
-        for item in TASKLIST:
+        for item in taskList:
             label = ttk.Label(self, text = item, font = MEDIUMFONT)
             label.grid(row = c, column = 5, padx = 10, pady = 10)
             c += 1
@@ -49,7 +54,7 @@ class tasksPage(tk.Frame):
                              command = lambda : controller.show_frame(help.helpPage))
         helpBtn.grid(row = 10, column = 10, padx = 10, pady = 10)
 
-        entry = ttk.Entry(self, text="add your new task here", width=10)
+        entry = ttk.Entry(self, textvariable = input, width=10)
         entry.grid(row =9, column = 5, padx = 10, pady = 10)
 
         addBtn = ttk.Button(self, text = "Add Task", command = addTasks)
