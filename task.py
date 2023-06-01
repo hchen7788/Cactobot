@@ -63,8 +63,6 @@ class tasksPage(tk.Frame):
             deleteList.clear()
             doneList.clear()
 
-            clearScreen()
-
             r = 2
             for item in taskList:
                 if(item == ""):
