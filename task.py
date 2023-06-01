@@ -6,9 +6,9 @@ import home
 import setting
 import help
 
-LARGEFONT =("Verdana", 35)
-MEDIUMFONT =("Verdana", 25)
-SMALLFONT =("Verdana", 15)
+LARGEFONT =("IBM Plex Sans Thai", 35)
+MEDIUMFONT =("IBM Plex Sans Thai", 25)
+SMALLFONT =("IBM Plex Sans Thai", 15)
 
 taskList = [("Brush your teeth", "!disabled"), ("Wash your face", "!disabled"), ("Take medication", "!disabled"), ("Eat and hydrate", "!disabled")]
 deleteList = []
@@ -31,7 +31,7 @@ class tasksPage(tk.Frame):
         # styles
         labelStyle = ttk.Style()
         labelStyle.theme_use('classic')
-        labelStyle.configure('task.TLabel', foreground = "white", background="#905C2C",
+        labelStyle.configure('task.TLabel', foreground = "white", background="#B8906A",
                              height = 15, width = 20, font = MEDIUMFONT)
         
         btnStyle = ttk.Style()
@@ -160,11 +160,11 @@ class tasksPage(tk.Frame):
         # running program starts here
         tk.Frame.__init__(self, parent)
         # putting the home and settings button
-        homeBtn = ttk.Button(self, text="HOME",
+        homeBtn = ttk.Button(self, text="HOME", style = "btn.TButton",
                              command = lambda : controller.show_frame(home.homePage))
         homeBtn.grid(row = 0, column = 1, padx = 10, pady = 10)
 
-        settingBtn = ttk.Button(self, text ="SETTINGS",
+        settingBtn = ttk.Button(self, text ="SETTINGS", style = "btn.TButton",
                                 command = lambda : controller.show_frame(setting.settingsPage))
         settingBtn.grid(row = 0, column = 10, padx = 10, pady = 10)
 
@@ -176,14 +176,14 @@ class tasksPage(tk.Frame):
         displayList()
 
         # putting help button to link to help page
-        helpBtn = ttk.Button(self, text = "HELP",
+        helpBtn = ttk.Button(self, text = "HELP", style = "btn.TButton",
                              command = lambda : controller.show_frame(help.helpPage))
         helpBtn.grid(row = 10, column = 10, padx = 10, pady = 10)
 
         entry = ttk.Entry(self, textvariable = input, width=10)
         entry.grid(row =9, column = 5, padx = 10, pady = 10)
 
-        addBtn = ttk.Button(self, text = "Add Task", command = addTasks)
+        addBtn = ttk.Button(self, text = "Add Task", style = "btn.TButton", command = addTasks)
         addBtn.grid(row = 8, column = 5, padx = 10, pady = 10)
 
         

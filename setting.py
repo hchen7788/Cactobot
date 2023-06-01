@@ -33,24 +33,24 @@ class settingsPage(tk.Frame):
         label.grid(row = 1, column = 5, padx = 10, pady = 10)
   
         # putting the home and settings button
-        homeBtn = ttk.Button(self, text="HOME",
+        homeBtn = ttk.Button(self, text="HOME", style = 'btn.TButton',
                              command = lambda : controller.show_frame(home.homePage))
         homeBtn.grid(row = 0, column = 1, padx = 10, pady = 10)
 
-        settingBtn = ttk.Button(self, text ="SETTINGS",
+        settingBtn = ttk.Button(self, text ="SETTINGS", style = 'btn.TButton',
                                 command = lambda : controller.show_frame(settingsPage))
         settingBtn.grid(row = 0, column = 10, padx = 10, pady = 10)
 
         # putting help button to link to help page
-        helpBtn = ttk.Button(self, text = "HELP",
+        helpBtn = ttk.Button(self, text = "HELP", style = 'btn.TButton',
                              command = lambda : controller.show_frame(help.helpPage))
         helpBtn.grid(row = 9, column = 10, padx = 10, pady = 10)
 
 
         # lay out 3 settings button
-        lightBtn = ttk.Button(self, text = "Light Color", command = changeLightColor)
-        musicBtn = ttk.Button(self, text = "Music", command = changeMusic)
-        volumeBtn = ttk.Button(self, text = "Volume Level", command = changeVolumeLevel)
+        lightBtn = ttk.Button(self, text = "Light Color", style = 'btn.TButton', command = changeLightColor)
+        musicBtn = ttk.Button(self, text = "Music", style = 'btn.TButton', command = changeMusic)
+        volumeBtn = ttk.Button(self, text = "Volume Level", style = 'btn.TButton', command = changeVolumeLevel)
         lightBtn.grid(row = 3, column = 1, padx = 10, pady = 10)
         musicBtn.grid(row = 5, column = 1, padx = 10, pady = 10)
         volumeBtn.grid(row = 7, column = 1, padx = 10, pady = 10)

@@ -15,11 +15,11 @@ class helpPage(tk.Frame):
         
      
         # putting the home and settings button
-        homeBtn = ttk.Button(self, text="HOME",
+        homeBtn = ttk.Button(self, text="HOME", style = 'btn.TButton',
                              command = lambda : controller.show_frame(home.homePage))
         homeBtn.grid(row = 0, column = 1, padx = 10, pady = 10)
 
-        settingBtn = ttk.Button(self, text ="SETTINGS",
+        settingBtn = ttk.Button(self, text ="SETTINGS", style = 'btn.TButton',
                                 command = lambda : controller.show_frame(setting.settingsPage))
         settingBtn.grid(row = 0, column = 10, padx = 10, pady = 10)
   
@@ -29,6 +29,6 @@ class helpPage(tk.Frame):
         label.grid(row = 1, column = 4, padx = 10, pady = 10)
 
         # putting help button to link to help page
-        helpBtn = ttk.Button(self, text = "HELP",
+        helpBtn = ttk.Button(self, text = "HELP", style = 'btn.TButton',
                              command = lambda : controller.show_frame(helpPage))
         helpBtn.grid(row = 9, column = 10, padx = 10, pady = 10)
