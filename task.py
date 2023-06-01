@@ -38,7 +38,7 @@ class tasksPage(tk.Frame):
             global listCount
             listCount -= 1
 
-            print("task ", i, " is going to be deleted")
+            print("task ", taskList[i], " is going to be deleted")
             del taskList[i]
             labelList[i].destroy()
             deleteList[i].destroy()
@@ -46,7 +46,16 @@ class tasksPage(tk.Frame):
             del labelList[i]
             del deleteList[i]
             del doneList[i]
+            clearScreen()
             displayList()
+        
+        def clearScreen():
+            for label in labelList:
+                label.destroy()
+            for deleteBtn in deleteList:
+                deleteBtn.destroy()
+            for doneBtn in doneList:
+                doneBtn.destroy()
             
         def displayList():
             # clear fields
@@ -54,11 +63,10 @@ class tasksPage(tk.Frame):
             deleteList.clear()
             doneList.clear()
 
+            clearScreen()
+
             r = 2
-            if(len(taskList) == 0):
-                print("list is empty now!")
             for item in taskList:
-                print("displaying ", len(taskList), " items")
                 if(item == ""):
                     continue
                 
