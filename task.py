@@ -9,7 +9,7 @@ import help
 LARGEFONT =("Verdana", 35)
 MEDIUMFONT =("Verdana", 25)
 
-taskList = ["Brush your teeth", "Wash your face", "Take medication", "Eat and hydrate"]
+taskList = [("Brush your teeth", "!disabled"), ("Wash your face", "!disabled"), ("Take medication", "!disabled"), ("Eat and hydrate", "!disabled")]
 deleteList = []
 labelList = []
 doneList = []
@@ -29,17 +29,27 @@ class tasksPage(tk.Frame):
             global checkCount
             checkCount += 1
             # TODO: @TANIA @ ANNA send signal to output for one item checked
+            # taskList[r][1] = 1
+            taskList[r] = (taskList[r][0], "disabled")
             doneList[r].state(["disabled"])
-            print("item ", r, " completed")
-            if(checkCount == listCount):
-                # TODO: @TANIA @ANNA send signal to output for all items checked
-                print("All tasks completed. Congrats!")
+
+            print("task ", taskList[r][0], " completed")
+
+            clearScreen()
+            displayList()
         
+
         def deleteItem(i):
             global listCount
             listCount -= 1
+            global checkCount
+            # check if this task is checked
+            state = doneList[i]['state']
+            if (state == 'disabled'):
+                checkCount -= 1
 
-            print("task ", taskList[i], " is going to be deleted")
+            print("task ", taskList[i][0], " is going to be deleted")
+
             del taskList[i]
             labelList[i].destroy()
             deleteList[i].destroy()
@@ -66,15 +76,15 @@ class tasksPage(tk.Frame):
 
             r = 2
             for item in taskList:
-                if(item == ""):
-                    continue
+                # if(item == ""):
+                #     continue
                 
-                label = ttk.Label(self, text = item, font = MEDIUMFONT)
+                label = ttk.Label(self, text = item[0], font = MEDIUMFONT)
                 label.grid(row = r, column = 5, padx = 10, pady = 10)
                 labelList.append(label)
 
                 # add done button to the left
-                doneBtn = ttk.Button(self, text = "DONE", command = partial(checkItem, r - 2))
+                doneBtn = ttk.Button(self, text = "DONE", state = item[1], command = partial(checkItem, r - 2))
                 doneBtn.grid(row = r, column = 4, padx = 10, pady = 10)
                 doneList.append(doneBtn)
 
@@ -83,15 +93,20 @@ class tasksPage(tk.Frame):
                 deleteBtn.grid(row = r, column = 6, padx = 10, pady = 10)
                 deleteList.append(deleteBtn)
                 r += 1
+
+            if(checkCount == listCount):
+                # TODO: @TANIA @ANNA send signal to output for all items checked
+                print("All tasks completed. Congrats!")
         
         def addTasks():
             entryText = input.get()
             if(entryText == ""):
                 return
-            taskList.append(entryText)
+            taskList.append((entryText, 0))
             input.set("")
             global listCount
             listCount += 1
+            clearScreen()
             displayList()
 
 
