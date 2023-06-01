@@ -13,6 +13,7 @@ taskList = [("Brush your teeth", "!disabled"), ("Wash your face", "!disabled"), 
 deleteList = []
 labelList = []
 doneList = []
+editList = []
 checkCount = 0
 listCount = len(taskList)
 
@@ -23,21 +24,38 @@ class tasksPage(tk.Frame):
     def __init__(self, parent, controller):
         # variables
         input = tk.StringVar()
+        editInput = tk.StringVar()
 
         # helpful functions
-        def checkItem(r):
+        def checkItem(i):
             global checkCount
             checkCount += 1
             # TODO: @TANIA @ ANNA send signal to output for one item checked
-            # taskList[r][1] = 1
-            taskList[r] = (taskList[r][0], "disabled")
-            doneList[r].state(["disabled"])
+            taskList[i] = (taskList[i][0], "disabled")
+            doneList[i].state(["disabled"])
+            editList[i].state(["disabled"])
 
-            print("task ", taskList[r][0], " completed")
+            print("task ", taskList[i][0], " completed")
 
             clearScreen()
             displayList()
+
         
+        def confirmEdit(i):
+            taskList[i] = (editInput.get(), taskList[i][1])
+            clearScreen()
+            displayList()
+        
+        
+        def editItem(i):
+            editList[i]['text'] = "CONFIRM"
+            editInput.set(labelList[i].cget('text'))
+            labelList[i].destroy()
+            entry = ttk.Entry(self, textvariable = editInput, width=10)
+            entry.grid(row = i + 2, column = 5, padx = 10, pady = 10)
+            # editList[i]['command'] = partial(confirmEdit, i, editInput.get())
+            editList[i]['command'] = partial(confirmEdit, i)
+
 
         def deleteItem(i):
             global listCount
@@ -54,9 +72,11 @@ class tasksPage(tk.Frame):
             labelList[i].destroy()
             deleteList[i].destroy()
             doneList[i].destroy()
+            editList[i].destroy()
             del labelList[i]
             del deleteList[i]
             del doneList[i]
+            del editList[i]
             clearScreen()
             displayList()
         
@@ -67,18 +87,18 @@ class tasksPage(tk.Frame):
                 deleteBtn.destroy()
             for doneBtn in doneList:
                 doneBtn.destroy()
+            for editBtn in editList:
+                editBtn.destroy()
             
         def displayList():
             # clear fields
             labelList.clear()
             deleteList.clear()
             doneList.clear()
+            editList.clear()
 
             r = 2
             for item in taskList:
-                # if(item == ""):
-                #     continue
-                
                 label = ttk.Label(self, text = item[0], font = MEDIUMFONT)
                 label.grid(row = r, column = 5, padx = 10, pady = 10)
                 labelList.append(label)
@@ -88,10 +108,16 @@ class tasksPage(tk.Frame):
                 doneBtn.grid(row = r, column = 4, padx = 10, pady = 10)
                 doneList.append(doneBtn)
 
+                # add edit button to the right
+                editBtn = ttk.Button(self, text = "EDIT", state = item[1], command = partial(editItem, r - 2))
+                editBtn.grid(row = r, column = 6, padx = 10, pady = 10)
+                editList.append(editBtn)
+
                 # add delete button to the right
                 deleteBtn = ttk.Button(self, text = "DELETE", command = partial(deleteItem, r - 2))
-                deleteBtn.grid(row = r, column = 6, padx = 10, pady = 10)
+                deleteBtn.grid(row = r, column = 7, padx = 10, pady = 10)
                 deleteList.append(deleteBtn)
+
                 r += 1
 
             if(checkCount == listCount):
