@@ -30,17 +30,23 @@ class homePage(tk.Frame):
 
         imgStyle = ttk.Style()
         imgStyle.configure('img.TLabel', background = "#77A752")
+        #77A752
 
      
         # putting the home and settings button
         homeBtn = ttk.Button(self, text="HOME", style = 'btn.TButton',
                              command = lambda : controller.show_frame(homePage))
-        homeBtn.grid(row = 0, column = 1, padx = 10, pady = 10)
+        homeBtn.grid(row = 0, column = 0, padx = 10, pady = 10, sticky = tk.NW)
 
         settingBtn = ttk.Button(self, text ="SETTINGS", style = 'btn.TButton',
                                 command = lambda : controller.show_frame(setting.settingsPage))
-        settingBtn.grid(row = 0, column = 10, padx = 10, pady = 10)
-  
+        settingBtn.grid(row = 0, column = 10, padx = 10, pady = 10, sticky = tk.NE)
+
+        # putting help button to link to help page
+        helpBtn = ttk.Button(self, text = "HELP", style = 'btn.TButton',
+                             command = lambda : controller.show_frame(help.helpPage))
+        # helpBtn.grid(row = 9, column = 10, padx = 10, pady = 10)
+        helpBtn.grid(row = 10, column = 10, padx = 10, pady = 10, sticky=tk.SE) 
         
         # label of header
         label = ttk.Label(self, text ="Hi I'm Cactcobot,\nyour personal reminder robot",
@@ -53,21 +59,15 @@ class homePage(tk.Frame):
         # add Catcobot image
 
         image_path = "images/Cactobot_big.png"
-
         image = tk.PhotoImage(file=image_path)
         # image = image.resize((100, 100))
         # Create a label widget and set the image
         imageLabel = ttk.Label(self, image=image, style = 'img.TLabel', width = 100)
         imageLabel.image = image  # Keep a reference to the image
-        imageLabel.grid(row = 5, column = 2, padx = 10, pady = 10)
+        imageLabel.grid(row = 10, column = 0, sticky = tk.SW, padx = 10, pady = 0)
 
         # task button to link to task page
         taskBtn = ttk.Button(self, text ="TASKS", style = 'btn.TButton',
                              command = lambda : controller.show_frame(task.tasksPage))
         taskBtn.grid(row = 5, column = 5, padx = 10, pady = 10)
-
-        # putting help button to link to help page
-        helpBtn = ttk.Button(self, text = "HELP", style = 'btn.TButton',
-                             command = lambda : controller.show_frame(help.helpPage))
-        helpBtn.grid(row = 9, column = 10, padx = 10, pady = 10)
         

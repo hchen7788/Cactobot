@@ -163,14 +163,20 @@ class tasksPage(tk.Frame):
 
         # running program starts here
         tk.Frame.__init__(self, parent)
-        # putting the home and settings button
-        homeBtn = ttk.Button(self, text="HOME", style = "btn.TButton",
+         # putting the home and settings button
+        homeBtn = ttk.Button(self, text="HOME", style = 'btn.TButton',
                              command = lambda : controller.show_frame(home.homePage))
-        homeBtn.grid(row = 0, column = 1, padx = 10, pady = 10)
+        homeBtn.grid(row = 0, column = 0, padx = 10, pady = 10, sticky = tk.NW)
 
-        settingBtn = ttk.Button(self, text ="SETTINGS", style = "btn.TButton",
+        settingBtn = ttk.Button(self, text ="SETTINGS", style = 'btn.TButton',
                                 command = lambda : controller.show_frame(setting.settingsPage))
-        settingBtn.grid(row = 0, column = 10, padx = 10, pady = 10)
+        settingBtn.grid(row = 0, column = 10, padx = 10, pady = 10, sticky = tk.NE)
+
+        # putting help button to link to help page
+        helpBtn = ttk.Button(self, text = "HELP", style = 'btn.TButton',
+                             command = lambda : controller.show_frame(help.helpPage))
+        # helpBtn.grid(row = 9, column = 10, padx = 10, pady = 10)
+        helpBtn.grid(row = 10, column = 10, padx = 10, pady = 10, sticky=tk.SE) 
 
         # put header text
         label = ttk.Label(self, text ="Here are today's tasks", font = LARGEFONT, background = "#77A752")
@@ -178,11 +184,6 @@ class tasksPage(tk.Frame):
 
         # lay out default checklist items
         displayList()
-
-        # putting help button to link to help page
-        helpBtn = ttk.Button(self, text = "HELP", style = "btn.TButton",
-                             command = lambda : controller.show_frame(help.helpPage))
-        helpBtn.grid(row = 10, column = 10, padx = 10, pady = 10)
 
         entry = ttk.Entry(self, textvariable = input, width=10)
         entry.grid(row =9, column = 5, padx = 10, pady = 10)
