@@ -8,6 +8,7 @@ import help
 
 LARGEFONT =("Verdana", 35)
 MEDIUMFONT =("Verdana", 25)
+SMALLFONT =("Verdana", 15)
 
 taskList = [("Brush your teeth", "!disabled"), ("Wash your face", "!disabled"), ("Take medication", "!disabled"), ("Eat and hydrate", "!disabled")]
 deleteList = []
@@ -22,15 +23,31 @@ listCount = len(taskList)
 class tasksPage(tk.Frame):
 
     def __init__(self, parent, controller):
+
         # variables
         input = tk.StringVar()
         editInput = tk.StringVar()
+
+        # styles
+        labelStyle = ttk.Style()
+        labelStyle.theme_use('classic')
+        labelStyle.configure('task.TLabel', foreground = "white", background="#905C2C",
+                             height = 15, width = 20, font = MEDIUMFONT)
+        
+        btnStyle = ttk.Style()
+        btnStyle.configure('btn.TButton', foreground = "black", background = "white", borderwidth=0,
+                           height = 15, width = 8, font = SMALLFONT)
+        # btnStyle.map("btn.TButton",
+        #              foreground=[('pressed', 'red'), ('active', 'blue')])
+
 
         # helpful functions
         def checkItem(i):
             global checkCount
             checkCount += 1
+
             # TODO: @TANIA @ ANNA send signal to output for one item checked
+
             taskList[i] = (taskList[i][0], "disabled")
             doneList[i].state(["disabled"])
             editList[i].state(["disabled"])
@@ -53,7 +70,6 @@ class tasksPage(tk.Frame):
             labelList[i].destroy()
             entry = ttk.Entry(self, textvariable = editInput, width=10)
             entry.grid(row = i + 2, column = 5, padx = 10, pady = 10)
-            # editList[i]['command'] = partial(confirmEdit, i, editInput.get())
             editList[i]['command'] = partial(confirmEdit, i)
 
 
@@ -99,22 +115,27 @@ class tasksPage(tk.Frame):
 
             r = 2
             for item in taskList:
-                label = ttk.Label(self, text = item[0], font = MEDIUMFONT)
+
+                label = ttk.Label(self, text = item[0], style = 'task.TLabel', anchor = "center")
                 label.grid(row = r, column = 5, padx = 10, pady = 10)
                 labelList.append(label)
 
+                
                 # add done button to the left
-                doneBtn = ttk.Button(self, text = "DONE", state = item[1], command = partial(checkItem, r - 2))
+                doneBtn = ttk.Button(self, text = "DONE", state = item[1],
+                                     style = "btn.TButton", command = partial(checkItem, r - 2))
                 doneBtn.grid(row = r, column = 4, padx = 10, pady = 10)
                 doneList.append(doneBtn)
 
                 # add edit button to the right
-                editBtn = ttk.Button(self, text = "EDIT", state = item[1], command = partial(editItem, r - 2))
+                editBtn = ttk.Button(self, text = "EDIT", state = item[1],
+                                     style = "btn.TButton", command = partial(editItem, r - 2))
                 editBtn.grid(row = r, column = 6, padx = 10, pady = 10)
                 editList.append(editBtn)
 
                 # add delete button to the right
-                deleteBtn = ttk.Button(self, text = "DELETE", command = partial(deleteItem, r - 2))
+                deleteBtn = ttk.Button(self, text = "DELETE",
+                                       style = "btn.TButton", command = partial(deleteItem, r - 2))
                 deleteBtn.grid(row = r, column = 7, padx = 10, pady = 10)
                 deleteList.append(deleteBtn)
 
@@ -148,7 +169,7 @@ class tasksPage(tk.Frame):
         settingBtn.grid(row = 0, column = 10, padx = 10, pady = 10)
 
         # put header text
-        label = ttk.Label(self, text ="Here are today's tasks", font = LARGEFONT)
+        label = ttk.Label(self, text ="Here are today's tasks", font = LARGEFONT, background = "#77A752")
         label.grid(row = 1, column = 5, padx = 10, pady = 10)
 
         # lay out default checklist items
@@ -165,8 +186,4 @@ class tasksPage(tk.Frame):
         addBtn = ttk.Button(self, text = "Add Task", command = addTasks)
         addBtn.grid(row = 8, column = 5, padx = 10, pady = 10)
 
-        # s = ttk.Style()                                                                 
-        # s.configure('Red.TCheckbutton', indicatorforeground="green", font = ('calibri', 10, 'bold', 'underline'),
-        #         foreground = 'red')         
-        # cb = ttk.Checkbutton(master=self, style='Red.TCheckbutton', text='Test')         
-        # cb.grid(row =11, column = 5, padx = 10, pady = 10) 
+        
