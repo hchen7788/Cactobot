@@ -29,6 +29,7 @@ class tasksPage(tk.Frame):
             global checkCount
             checkCount += 1
             # TODO: @TANIA @ ANNA send signal to output for one item checked
+            doneList[r].state(["disabled"])
             print("item ", r, " completed")
             if(checkCount == listCount):
                 # TODO: @TANIA @ANNA send signal to output for all items checked
