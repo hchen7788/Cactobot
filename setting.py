@@ -15,15 +15,15 @@ class settingsPage(tk.Frame):
     def __init__(self, parent, controller):
         # helpful functions
         def changeLightColor():
-            # TODO
+            # TODO @TANIA
             print("change light color here")
 
         def changeMusic():
-            # TODO
+            # TODO @ANNA
             print("change music here")
 
         def changeVolumeLevel():
-            # TODO
+            # TODO @ANNA
             print("change volume level here")
         
         
