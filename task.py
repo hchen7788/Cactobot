@@ -11,6 +11,8 @@ MEDIUMFONT =("Verdana", 25)
 
 taskList = ["Brush your teeth", "Wash your face", "Take medication", "Eat and hydrate"]
 deleteList = []
+labelList = []
+doneList = []
 checkCount = 0
 listCount = len(taskList)
 
@@ -23,46 +25,56 @@ class tasksPage(tk.Frame):
         input = tk.StringVar()
 
         # helpful functions
-        def find_widget(x,y):
-            for child in self.children.values():
-                x1 = child.winfo_rootx()-self.winfo_rootx()
-                y1 = child.winfo_rooty()-self.winfo_rooty()
-                x2 = x1+ child.winfo_width()
-                y2 = y1+ child.winfo_height()
-                if x1 <= x <= x2 and y1 <= y <= y2:
-                    return child
-            return None
-        
         def checkItem(r):
             global checkCount
             checkCount += 1
             # TODO: @TANIA @ ANNA send signal to output for one item checked
-            print("item ", r, " checked")
+            print("item ", r, " completed")
             if(checkCount == listCount):
                 # TODO: @TANIA @ANNA send signal to output for all items checked
-                print("All tasks complete. Congrats!")
+                print("All tasks completed. Congrats!")
         
-        def deleteItem(r):
-            # print("item deleted")
-            # print(self.grid_info()['row'])
-            # print(self.grid_info()['column'])
-            print("task ", r, " is going to be deleted")
+        def deleteItem(i):
+            global listCount
+            listCount -= 1
+
+            print("task ", i, " is going to be deleted")
+            del taskList[i]
+            labelList[i].destroy()
+            deleteList[i].destroy()
+            doneList[i].destroy()
+            del labelList[i]
+            del deleteList[i]
+            del doneList[i]
+            displayList()
             
         def displayList():
+            # clear fields
+            labelList.clear()
+            deleteList.clear()
+            doneList.clear()
+
             r = 2
+            if(len(taskList) == 0):
+                print("list is empty now!")
             for item in taskList:
+                print("displaying ", len(taskList), " items")
+                if(item == ""):
+                    continue
+                
                 label = ttk.Label(self, text = item, font = MEDIUMFONT)
                 label.grid(row = r, column = 5, padx = 10, pady = 10)
+                labelList.append(label)
 
                 # add done button to the left
                 doneBtn = ttk.Button(self, text = "DONE", command = partial(checkItem, r - 2))
                 doneBtn.grid(row = r, column = 4, padx = 10, pady = 10)
+                doneList.append(doneBtn)
 
                 # add delete button to the right
                 deleteBtn = ttk.Button(self, text = "DELETE", command = partial(deleteItem, r - 2))
                 deleteBtn.grid(row = r, column = 6, padx = 10, pady = 10)
                 deleteList.append(deleteBtn)
-                print(deleteList)
                 r += 1
         
         def addTasks():
@@ -74,6 +86,7 @@ class tasksPage(tk.Frame):
             global listCount
             listCount += 1
             displayList()
+
 
         # running program starts here
         tk.Frame.__init__(self, parent)
