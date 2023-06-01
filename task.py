@@ -40,6 +40,9 @@ class tasksPage(tk.Frame):
         # btnStyle.map("btn.TButton",
         #              foreground=[('pressed', 'red'), ('active', 'blue')])
 
+        entryStyle = ttk.Style()
+        entryStyle.configure('entry.TEntry', font = MEDIUMFONT)
+
 
         # helpful functions
         def checkItem(i):
@@ -58,8 +61,9 @@ class tasksPage(tk.Frame):
             displayList()
 
         
-        def confirmEdit(i):
+        def confirmEdit(i, entry):
             taskList[i] = (editInput.get(), taskList[i][1])
+            entry.destroy()
             clearScreen()
             displayList()
         
@@ -68,9 +72,9 @@ class tasksPage(tk.Frame):
             editList[i]['text'] = "CONFIRM"
             editInput.set(labelList[i].cget('text'))
             labelList[i].destroy()
-            entry = ttk.Entry(self, textvariable = editInput, width=10)
+            entry = ttk.Entry(self, textvariable = editInput, style = 'entry.TEntry', width = 20, font = MEDIUMFONT)
             entry.grid(row = i + 2, column = 5, padx = 10, pady = 10)
-            editList[i]['command'] = partial(confirmEdit, i)
+            editList[i]['command'] = partial(confirmEdit, i, entry)
 
 
         def deleteItem(i):
