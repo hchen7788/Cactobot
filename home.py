@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
+import subprocess
 
 import setting
 import task
@@ -29,7 +30,7 @@ class homePage(tk.Frame):
 
         imgStyle = ttk.Style()
         imgStyle.configure('img.TLabel', background = "#77A752")
-        
+
      
         # putting the home and settings button
         homeBtn = ttk.Button(self, text="HOME", style = 'btn.TButton',
@@ -50,13 +51,15 @@ class homePage(tk.Frame):
         label.grid(row = 2, column = 5, padx = 10, pady = 10)
 
         # add Catcobot image
-        # Load the image
-        image_path = "images/Cactobot.png"
+
+        image_path = "images/Cactobot_big.png"
+
         image = tk.PhotoImage(file=image_path)
+        # image = image.resize((100, 100))
         # Create a label widget and set the image
-        l1 = ttk.Label(self, image=image, style = 'img.TLabel')
-        l1.image = image  # Keep a reference to the image
-        l1.grid(row = 3, column = 3, padx = 10, pady = 10)
+        imageLabel = ttk.Label(self, image=image, style = 'img.TLabel', width = 100)
+        imageLabel.image = image  # Keep a reference to the image
+        imageLabel.grid(row = 5, column = 2, padx = 10, pady = 10)
 
         # task button to link to task page
         taskBtn = ttk.Button(self, text ="TASKS", style = 'btn.TButton',
