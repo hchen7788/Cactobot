@@ -6,9 +6,10 @@ import home
 import setting
 import help
 
-LARGEFONT =("IBM Plex Sans Thai", 35)
-MEDIUMFONT =("IBM Plex Sans Thai", 25)
+LARGEFONT =("IBM Plex Sans Thai", 55)
+MEDIUMFONT =("IBM Plex Sans Thai", 35)
 SMALLFONT =("IBM Plex Sans Thai", 15)
+BTNFONT =("IBM Plex Sans Thai", 35)
 
 taskList = [("Brush your teeth", "!disabled"), ("Wash your face", "!disabled"), ("Take medication", "!disabled"), ("Eat and hydrate", "!disabled")]
 deleteList = []
@@ -35,13 +36,15 @@ class tasksPage(tk.Frame):
                              height = 15, width = 20, font = MEDIUMFONT)
         
         btnStyle = ttk.Style()
-        btnStyle.configure('btn.TButton', foreground = "black", background = "white", borderwidth=0,
-                           height = 15, width = 8, font = SMALLFONT)
+        btnStyle.configure('btn.TButton', foreground = "black", background = "#77A752", borderwidth=0)
         # btnStyle.map("btn.TButton",
         #              foreground=[('pressed', 'red'), ('active', 'blue')])
 
         entryStyle = ttk.Style()
         entryStyle.configure('entry.TEntry', font = MEDIUMFONT)
+
+        imgStyle = ttk.Style()
+        imgStyle.configure('img.TLabel', background = "#77A752")
 
 
         # helpful functions
@@ -126,20 +129,29 @@ class tasksPage(tk.Frame):
 
                 
                 # add done button to the left
-                doneBtn = ttk.Button(self, text = "DONE", state = item[1],
+                done_icon_path = "images/check_icon.png"
+                done_icon = tk.PhotoImage(file = done_icon_path)
+                doneBtn = ttk.Button(self, text = "DONE", state = item[1], image = done_icon, 
                                      style = "btn.TButton", command = partial(checkItem, r - 2))
+                doneBtn.image = done_icon
                 doneBtn.grid(row = r, column = 4, padx = 10, pady = 10)
                 doneList.append(doneBtn)
 
-                # add edit button to the right
-                editBtn = ttk.Button(self, text = "EDIT", state = item[1],
-                                     style = "btn.TButton", command = partial(editItem, r - 2))
+                # add edit button with icon to the right
+                edit_icon_path = "images/edit_icon.png"
+                edit_icon = tk.PhotoImage(file = edit_icon_path)
+                editBtn = ttk.Button(self, text = "EDIT", state = item[1], style = "btn.TButton",
+                                     image = edit_icon, command = partial(editItem, r - 2))
+                editBtn.image = edit_icon
                 editBtn.grid(row = r, column = 6, padx = 10, pady = 10)
                 editList.append(editBtn)
 
                 # add delete button to the right
-                deleteBtn = ttk.Button(self, text = "DELETE",
+                delete_icon_path = "images/trash_icon.png"
+                delete_icon = tk.PhotoImage(file = delete_icon_path)
+                deleteBtn = ttk.Button(self, text = "-", image = delete_icon,
                                        style = "btn.TButton", command = partial(deleteItem, r - 2))
+                deleteBtn.image = delete_icon
                 deleteBtn.grid(row = r, column = 7, padx = 10, pady = 10)
                 deleteList.append(deleteBtn)
 
@@ -163,20 +175,29 @@ class tasksPage(tk.Frame):
 
         # running program starts here
         tk.Frame.__init__(self, parent)
-         # putting the home and settings button
-        homeBtn = ttk.Button(self, text="HOME", style = 'btn.TButton',
+        # putting the home and settings button
+        home_icon_path = "images/home_icon.png"
+        home_icon = tk.PhotoImage(file = home_icon_path)
+        homeBtn = ttk.Button(self, text="HOME", style = 'btn.TButton', image = home_icon,
                              command = lambda : controller.show_frame(home.homePage))
+        homeBtn.image = home_icon
         homeBtn.grid(row = 0, column = 0, padx = 10, pady = 10, sticky = tk.NW)
 
-        settingBtn = ttk.Button(self, text ="SETTINGS", style = 'btn.TButton',
+        setting_icon_path = "images/setting_icon.png"
+        setting_icon = tk.PhotoImage(file = setting_icon_path)
+        settingBtn = ttk.Button(self, text ="SETTINGS", style = 'btn.TButton', image = setting_icon,
                                 command = lambda : controller.show_frame(setting.settingsPage))
+        settingBtn.image = setting_icon
         settingBtn.grid(row = 0, column = 10, padx = 10, pady = 10, sticky = tk.NE)
 
         # putting help button to link to help page
-        helpBtn = ttk.Button(self, text = "HELP", style = 'btn.TButton',
+        help_icon_path = "images/help_icon.png"
+        help_icon = tk.PhotoImage(file = help_icon_path)
+        helpBtn = ttk.Button(self, text = "HELP", style = 'btn.TButton', image = help_icon, 
                              command = lambda : controller.show_frame(help.helpPage))
-        # helpBtn.grid(row = 9, column = 10, padx = 10, pady = 10)
+        helpBtn.image = help_icon
         helpBtn.grid(row = 10, column = 10, padx = 10, pady = 10, sticky=tk.SE) 
+
 
         # put header text
         label = ttk.Label(self, text ="Here are today's tasks", font = LARGEFONT, background = "#77A752")
@@ -188,7 +209,23 @@ class tasksPage(tk.Frame):
         entry = ttk.Entry(self, textvariable = input, width=10)
         entry.grid(row =9, column = 5, padx = 10, pady = 10)
 
-        addBtn = ttk.Button(self, text = "Add Task", style = "btn.TButton", command = addTasks)
-        addBtn.grid(row = 8, column = 5, padx = 10, pady = 10)
+        # add button with image
+
+        # Creating a photoimage object to use image
+        add_icon_path = "images/add_icon.png"
+        add_icon = tk.PhotoImage(file = add_icon_path)
+        addBtn = ttk.Button(self, style = "btn.TButton",
+                            image = add_icon, command = addTasks)
+        addBtn.image = add_icon
+        addBtn.grid(row = 8, column = 5)
+
+        # add Catcobot image
+        image_path = "images/Cactobot.png"
+        image = tk.PhotoImage(file=image_path)
+        # image = image.resize((100, 100))
+        # Create a label widget and set the image
+        imageLabel = ttk.Label(self, image=image, style = 'img.TLabel', width = 100)
+        imageLabel.image = image  # Keep a reference to the image
+        imageLabel.grid(row = 10, column = 0, sticky = tk.SW, padx = 10, pady = 0)
 
         
