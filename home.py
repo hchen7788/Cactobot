@@ -105,8 +105,21 @@ class homePage(tk.Frame):
         # dummy_c3 = ttk.Label(self, text = "make it short", background="white")
         # dummy_c3.grid(row =1, column = 3)
 
+
+        # putting help button to link to help page
+        help_icon_path = "images/help_icon.png"
+        help_icon = tk.PhotoImage(file = help_icon_path)
+        helpBtn = ttk.Button(self, text = "HELP", style = 'btn.TButton', image = help_icon, 
+                             command = lambda : controller.show_frame(help.helpPage))
+        helpBtn.image = help_icon
+        helpBtn.grid(row = 2, column = 2, padx = 10, pady = 10, sticky=tk.SE)
+
+
         # task button to link to task page
-        taskBtn = ttk.Button(self, text ="TASKS", style = 'btn.TButton',
+        task_icon_path = "images/task_icon.png"
+        task_icon = tk.PhotoImage(file = task_icon_path)
+        taskBtn = ttk.Button(self, image = task_icon, style = 'btn.TButton',
                              command = lambda : controller.show_frame(task.tasksPage))
+        taskBtn.image = task_icon
         taskBtn.grid(row = 2, column = 1, padx = 10, pady = 10)
         
