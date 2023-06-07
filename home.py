@@ -10,7 +10,6 @@ import help
 LARGEFONT =("Hind", 55)
 MEDIUMFONT =("IM FELL Great Primer", 35)
 SMALLFONT =("IM FELL Great Primer", 15)
-DIALOGFONT =("Hind", 55)
 
 # first window frame startpage
 class homePage(tk.Frame):
@@ -23,14 +22,9 @@ class homePage(tk.Frame):
         labelStyle.configure('header.TLabel', foreground = "black", background="#77A752",
                              height = 30, width = 30, font = LARGEFONT, anchor = "center")
         
-        labelStyle = ttk.Style()
-        labelStyle.theme_use('classic')
-        labelStyle.configure('dialog.TLabel', foreground = "black", background="#77A752",
-                             height = 30, width = 30, font = DIALOGFONT, anchor = "center")
-        
         btnStyle = ttk.Style()
-        btnStyle.configure('btn.TButton', foreground = "black", background = "white", borderwidth=0,
-                           bordercolor = "red", height = 30, width = 8, font = SMALLFONT)
+        btnStyle.configure('btn.TButton', foreground = "black", background = "white",
+                           highlightthickness=0, height = 30, font = SMALLFONT)
         # btnStyle.map("btn.TButton",
         #              foreground=[('pressed', 'red'), ('active', 'blue')])
 
