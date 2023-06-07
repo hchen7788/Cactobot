@@ -49,6 +49,22 @@ class tasksPage(tk.Frame):
         imgStyle = ttk.Style()
         imgStyle.configure('img.TLabel', background = "#77A752")
 
+        # Instantiate mixer
+        mixer.init()
+
+
+        def playSound(sound):
+            # Load audio file
+            mixer.music.load(sound)
+
+
+            # Set preferred volume
+            mixer.music.set_volume(0.2)
+
+
+            # Play the music
+            mixer.music.play()
+
 
         # helpful functions
         def checkItem(i):
@@ -58,8 +74,8 @@ class tasksPage(tk.Frame):
             # TODO: @TANIA @ ANNA send signal to output for one item checked
 
             # Task complete sound
-            #soundPath = 'audio/Short_Success_Glockenspiel.mp3'
-            #playSound(soundPath)
+            soundPath = 'audio/Short_Success_Glockenspiel.mp3'
+            playSound(soundPath)
 
             taskList[i] = (taskList[i][0], "disabled")
             doneList[i].state(["disabled"])
@@ -168,8 +184,8 @@ class tasksPage(tk.Frame):
                 # TODO: @TANIA @ANNA send signal to output for all items checked
 
                 # All tasks completed sound
-                #soundPath = 'audio/Success_Trumpets.mp3'
-                #playSound(soundPath)
+                soundPath = 'audio/Success_Trumpets.mp3'
+                playSound(soundPath)
 
                 print("All tasks completed. Congrats!")
         
