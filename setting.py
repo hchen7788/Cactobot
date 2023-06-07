@@ -29,23 +29,31 @@ class settingsPage(tk.Frame):
         
         # running program starts here
         tk.Frame.__init__(self, parent)
-        label = ttk.Label(self, text ="Settings", font = LARGEFONT)
-        label.grid(row = 1, column = 5, padx = 10, pady = 10)
+        label = ttk.Label(self, text ="Settings", font = LARGEFONT, background = "#77A752")
+        label.grid(row = 0, column = 1, padx = 10, pady = 10)
   
         # putting the home and settings button
-        homeBtn = ttk.Button(self, text="HOME", style = 'btn.TButton',
+        home_icon_path = "images/home_icon.png"
+        home_icon = tk.PhotoImage(file = home_icon_path)
+        homeBtn = ttk.Button(self, text="HOME", style = 'btn.TButton', image = home_icon,
                              command = lambda : controller.show_frame(home.homePage))
+        homeBtn.image = home_icon
         homeBtn.grid(row = 0, column = 0, padx = 10, pady = 10, sticky = tk.NW)
 
-        settingBtn = ttk.Button(self, text ="SETTINGS", style = 'btn.TButton',
+        setting_icon_path = "images/setting_icon.png"
+        setting_icon = tk.PhotoImage(file = setting_icon_path)
+        settingBtn = ttk.Button(self, text ="SETTINGS", style = 'btn.TButton', image = setting_icon,
                                 command = lambda : controller.show_frame(settingsPage))
-        settingBtn.grid(row = 0, column = 10, padx = 10, pady = 10, sticky = tk.NE)
+        settingBtn.image = setting_icon
+        settingBtn.grid(row = 0, column = 2, padx = 10, pady = 10, sticky = tk.NE)
 
         # putting help button to link to help page
-        helpBtn = ttk.Button(self, text = "HELP", style = 'btn.TButton',
+        help_icon_path = "images/help_icon.png"
+        help_icon = tk.PhotoImage(file = help_icon_path)
+        helpBtn = ttk.Button(self, text = "HELP", style = 'btn.TButton', image = help_icon, 
                              command = lambda : controller.show_frame(help.helpPage))
-        # helpBtn.grid(row = 9, column = 10, padx = 10, pady = 10)
-        helpBtn.grid(row = 10, column = 10, padx = 10, pady = 10, sticky=tk.SE) 
+        helpBtn.image = help_icon
+        helpBtn.grid(row = 2, column = 2, padx = 10, pady = 10, sticky=tk.SE)
 
 
         # lay out 3 settings button
