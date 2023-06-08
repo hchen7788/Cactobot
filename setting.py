@@ -8,6 +8,7 @@ import help
 LARGEFONT =("Verdana", 35)
 MEDIUMFONT =("Verdana", 25)
 
+selectedMusicPath = "audio/Short_Success_Glockenspiel.mp3" # default is Short_Success_Glockenspiel.mp3
 
 # settings page window
 class settingsPage(tk.Frame):
@@ -29,6 +30,18 @@ class settingsPage(tk.Frame):
                 musicMenu.grid(row=5, column=2, padx=10, pady=10, sticky=tk.W)
             else:
                 musicMenu.grid_remove()
+
+        def selectMusic():
+            selectedIndices = musicListbox.curselection()
+            print(selectedIndices)
+            print(len(selectedIndices) == 0)
+
+            if not len(selectedIndices) == 0:
+                index = int(list(selectedIndices)[0])
+                selectedMusic = musicOptions[index]
+
+                global selectedMusicPath
+                selectedMusicPath = musicPaths[index]
 
         def changeVolumeLevel():
             # TODO @ANNA
@@ -69,7 +82,6 @@ class settingsPage(tk.Frame):
         helpBtn.image = help_icon
         helpBtn.grid(row = 10, column = 10, padx = 10, pady = 10, sticky=tk.SE)
 
-
         # lay out 3 settings button
         lightBtn = ttk.Button(self, text = "Light Color", style = 'btn.TButton', command = changeLightColor)
         musicBtn = ttk.Button(self, text = "Music", style = 'btn.TButton', command = changeMusic)
@@ -79,16 +91,27 @@ class settingsPage(tk.Frame):
         volumeBtn.grid(row = 7, column = 1, padx = 10, pady = 10)
 
         ################################################
-        # change music button clicked UI
+        # music button clicked UI
         musicMenu = ttk.Frame(self)
+
         musicOptions = ["Deep Bell", "Short Success", "Success Trumpets"]
-        musicPaths = 
-        musicListbox = tk.Listbox(musicMenu, width=40)
+        musicPaths = ["audio/Deep_Bell.mp3", "audio/Short_Success_Glockenspiel.mp3", "audio/Success_Trumpets.mp3"]
+
+        musicListbox = tk.Listbox(musicMenu, width=40, selectmode=tk.SINGLE)
         scrollbar = tk.Scrollbar(musicMenu, orient=tk.VERTICAL, command=musicListbox.yview)
         musicListbox.config(yscrollcommand=scrollbar.set)
+        
         for option in musicOptions:
             musicListbox.insert(tk.END, option)
+        
         musicListbox.grid(row=0, column=0, sticky=tk.NSEW)
         scrollbar.grid(row=0, column=1, sticky=tk.NS)
+
+        selectButton = ttk.Button(musicMenu, text="Select", command=selectMusic)
+        selectButton.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
+
         musicMenu.grid(row=5, column=2, padx=10, pady=10, sticky=tk.W)
         musicMenu.grid_remove()
+
+def getSelectedMusicPath():
+    return selectedMusicPath

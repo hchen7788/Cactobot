@@ -53,14 +53,12 @@ class tasksPage(tk.Frame):
         mixer.init()
 
 
-        def playSound(sound):
+        def playSound():
             # Load audio file
-            mixer.music.load(sound)
-
+            mixer.music.load(setting.getSelectedMusicPath())
 
             # Set preferred volume
             mixer.music.set_volume(0.2)
-
 
             # Play the music
             mixer.music.play()
@@ -74,8 +72,8 @@ class tasksPage(tk.Frame):
             # TODO: @TANIA @ ANNA send signal to output for one item checked
 
             # Task complete sound
-            soundPath = 'audio/Short_Success_Glockenspiel.mp3'
-            playSound(soundPath)
+            #soundPath = 'audio/Short_Success_Glockenspiel.mp3'
+            playSound()
 
             taskList[i] = (taskList[i][0], "disabled")
             doneList[i].state(["disabled"])
@@ -184,8 +182,8 @@ class tasksPage(tk.Frame):
                 # TODO: @TANIA @ANNA send signal to output for all items checked
 
                 # All tasks completed sound
-                soundPath = 'audio/Success_Trumpets.mp3'
-                playSound(soundPath)
+                #soundPath = 'audio/Success_Trumpets.mp3'
+                playSound()
 
                 print("All tasks completed. Congrats!")
         
