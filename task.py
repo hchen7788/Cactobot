@@ -97,7 +97,7 @@ class tasksPage(tk.Frame):
             editInput.set(labelList[i].cget('text'))
             labelList[i].destroy()
             entry = ttk.Entry(self, textvariable = editInput, style = 'entry.TEntry', width = 20, font = MEDIUMFONT)
-            entry.grid(row = i + 2, column = 5, padx = 10, pady = 10)
+            entry.grid(row = i + 2, column = 1, padx = 10, pady = 10)
             editList[i]['command'] = partial(confirmEdit, i, entry)
 
 
