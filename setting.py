@@ -1,7 +1,5 @@
 import tkinter as tk
 from tkinter import ttk
-from tkinter import messagebox
-from tkinter.simpledialog import askfloat
 
 import home
 import task
