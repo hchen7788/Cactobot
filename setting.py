@@ -32,7 +32,7 @@ class settingsPage(tk.Frame):
             volumeMenu.grid_remove()
 
             if not musicMenu.winfo_ismapped():
-                musicMenu.grid(row=5, column=2, padx=10, pady=10, sticky=tk.W)
+                musicMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W)
             else:
                 musicMenu.grid_remove()
 
@@ -56,7 +56,7 @@ class settingsPage(tk.Frame):
             musicMenu.grid_remove()
 
             if not volumeMenu.winfo_ismapped():
-                volumeMenu.grid(row=7, column=2, padx=10, pady=10, sticky=tk.W)
+                volumeMenu.grid(row=3, column=1, padx=10, pady=10, sticky=tk.W)
             else:
                 volumeMenu.grid_remove()
 
@@ -105,16 +105,16 @@ class settingsPage(tk.Frame):
                              command = lambda: handleButtonClick(help.helpPage))
         helpBtn.image = help_icon
 
-        helpBtn.grid(row = 4, column = 2, padx = 10, pady = 10, sticky=tk.SE)
+        helpBtn.grid(row = 4, column = 3, padx = 10, pady = 10, sticky=tk.SE)
 
         # lay out 3 settings button
         lightBtn = ttk.Button(self, text = "Light Color", style = 'btn.TButton', command = changeLightColor)
         musicBtn = ttk.Button(self, text = "Music", style = 'btn.TButton', command = changeMusic)
         volumeBtn = ttk.Button(self, text = "Volume Level", style = 'btn.TButton', command = changeVolumeLevel)
-
-        lightBtn.grid(row = 3, column = 1, padx = 10, pady = 10)
-        musicBtn.grid(row = 5, column = 1, padx = 10, pady = 10)
-        volumeBtn.grid(row = 7, column = 1, padx = 10, pady = 10)
+        
+        lightBtn.grid(row = 1, column = 0, padx = 10, pady = 10)
+        musicBtn.grid(row = 2, column = 0, padx = 10, pady = 10)
+        volumeBtn.grid(row = 3, column = 0, padx = 10, pady = 10)
 
         ################################################
         # music button clicked UI
@@ -123,7 +123,7 @@ class settingsPage(tk.Frame):
         musicOptions = ["Deep Bell", "Short Success", "Success Trumpets"]
         musicPaths = ["audio/Deep_Bell.mp3", "audio/Short_Success_Glockenspiel.mp3", "audio/Success_Trumpets.mp3"]
 
-        musicListbox = tk.Listbox(musicMenu, width=40, selectmode=tk.SINGLE)
+        musicListbox = tk.Listbox(musicMenu, width=20, selectmode=tk.SINGLE)
         scrollbar = tk.Scrollbar(musicMenu, orient=tk.VERTICAL, command=musicListbox.yview)
         musicListbox.config(yscrollcommand=scrollbar.set)
         
@@ -136,7 +136,7 @@ class settingsPage(tk.Frame):
         selectButton = ttk.Button(musicMenu, text="Select", command=selectMusic)
         selectButton.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
 
-        musicMenu.grid(row=5, column=2, padx=10, pady=10, sticky=tk.W)
+        musicMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W)
         musicMenu.grid_remove()
 
         ################################################
@@ -152,7 +152,7 @@ class settingsPage(tk.Frame):
         decrementButton = ttk.Button(volumeMenu, text="Decrease", command=decrementVolume)
         decrementButton.grid(row=2, column=0, padx=10, pady=10)
 
-        volumeMenu.grid(row=7, column=2, padx=10, pady=10, sticky=tk.W)
+        volumeMenu.grid(row=3, column=1, padx=10, pady=10, sticky=tk.W)
         volumeMenu.grid_remove()
 
 
@@ -162,9 +162,6 @@ def getSelectedMusicPath():
 def getSelectedVolumeLevel():
     return selectedVolumeLevel
 
-        lightBtn.grid(row = 1, column = 0, padx = 10, pady = 10)
-        musicBtn.grid(row = 2, column = 0, padx = 10, pady = 10)
-        volumeBtn.grid(row = 3, column = 0, padx = 10, pady = 10)
   
   
 
