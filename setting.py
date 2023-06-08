@@ -115,10 +115,16 @@ class settingsPage(tk.Frame):
 
         helpBtn.grid(row = 4, column = 3, padx = 10, pady = 10, sticky=tk.SE)
 
+        settingBtnStyle = ttk.Style()
+        settingBtnStyle.theme_use('classic')
+        settingBtnStyle.configure('settingBtn.TButton', foreground = "black", background = "#D9E9CD",
+                           highlightthickness = 0, width = 15, borderwidth = 0, font = MEDIUMFONT)
+        # #96BF76
+
         # lay out 3 settings button
-        lightBtn = ttk.Button(self, text = "Light Color", style = 'btn.TButton', command = changeLightColor)
-        musicBtn = ttk.Button(self, text = "Music", style = 'btn.TButton', command = changeMusic)
-        volumeBtn = ttk.Button(self, text = "Volume Level", style = 'btn.TButton', command = changeVolumeLevel)
+        lightBtn = ttk.Button(self, text = "Light Color", style = 'settingBtn.TButton', command = changeLightColor)
+        musicBtn = ttk.Button(self, text = "Music", style = 'settingBtn.TButton', command = changeMusic)
+        volumeBtn = ttk.Button(self, text = "Volume Level", style = 'settingBtn.TButton', command = changeVolumeLevel)
         
         lightBtn.grid(row = 1, column = 0, padx = 10, pady = 10)
         musicBtn.grid(row = 2, column = 0, padx = 10, pady = 10)
@@ -160,8 +166,8 @@ class settingsPage(tk.Frame):
         volumeLabel.grid(row=0, column=0, padx=10, pady=10)
 
         volBtnStyle = ttk.Style()
-        volBtnStyle.configure('volBtn.TButton', background='#96BF76',
-                              highlightthickness = 0, font = MEDIUMFONT)
+        volBtnStyle.configure('volBtn.TButton', background='#D9E9CD',
+                              highlightthickness = 0, borderwidth = 0, font = MEDIUMFONT)
 
         incrementButton = ttk.Button(volumeMenu, text="Increase",
                                      style = "volBtn.TButton", command=incrementVolume)
