@@ -20,8 +20,9 @@ class settingsPage(tk.Frame):
             # TODO @TANIA
             print("change light color here")
 
-            # Hide music menu
+            # Hide music + volume menu
             musicMenu.grid_remove() 
+            volumeMenu.grid_remove()
 
         def changeMusic():
             # TODO @ANNA
