@@ -149,15 +149,26 @@ class settingsPage(tk.Frame):
 
         ################################################
         # volume menu UI
-        volumeMenu = ttk.Frame(self)
 
-        volumeLabel = ttk.Label(volumeMenu, text=f"Volume: {selectedVolumeLevel:.1f}", font=MEDIUMFONT)
+        frameStyle = ttk.Style()
+        frameStyle.configure('volumeMenu.TFrame', background='#96BF76')
+
+        volumeMenu = ttk.Frame(self, style = 'volumeMenu.TFrame')
+
+        volumeLabel = ttk.Label(volumeMenu, text=f"Volume: {selectedVolumeLevel:.1f}",
+                                font=LARGEFONT, background = "#96BF76")
         volumeLabel.grid(row=0, column=0, padx=10, pady=10)
 
-        incrementButton = ttk.Button(volumeMenu, text="Increase", command=incrementVolume)
+        volBtnStyle = ttk.Style()
+        volBtnStyle.configure('volBtn.TButton', background='#96BF76',
+                              highlightthickness = 0, font = MEDIUMFONT)
+
+        incrementButton = ttk.Button(volumeMenu, text="Increase",
+                                     style = "volBtn.TButton", command=incrementVolume)
         incrementButton.grid(row=1, column=0, padx=10, pady=10)
 
-        decrementButton = ttk.Button(volumeMenu, text="Decrease", command=decrementVolume)
+        decrementButton = ttk.Button(volumeMenu, text="Decrease",
+                                     style = "volBtn.TButton", command=decrementVolume)
         decrementButton.grid(row=2, column=0, padx=10, pady=10)
 
         volumeMenu.grid(row=3, column=1, padx=10, pady=10, sticky=tk.W)
