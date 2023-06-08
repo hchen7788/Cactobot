@@ -100,7 +100,7 @@ class homePage(tk.Frame):
 
 
         # task button to link to task page
-        task_icon_path = "images/task_icon.png"
+        task_icon_path = "images/task_icon_big.png"
         task_icon = tk.PhotoImage(file = task_icon_path)
         taskBtn = ttk.Button(self, image = task_icon, style = 'btn.TButton',
                              command = lambda : controller.show_frame(task.tasksPage))
