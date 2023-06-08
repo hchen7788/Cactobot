@@ -98,6 +98,7 @@ class tasksPage(tk.Frame):
             labelList[i].destroy()
             entry = ttk.Entry(self, textvariable = editInput, style = 'entry.TEntry', width = 20, font = MEDIUMFONT)
             entry.grid(row = i + 2, column = 1, padx = 10, pady = 10)
+            # TODO: screenkeyboard when clicked on entry
             editList[i]['command'] = partial(confirmEdit, i, entry)
 
 
@@ -233,7 +234,8 @@ class tasksPage(tk.Frame):
         displayList()
 
         entry = ttk.Entry(self, textvariable = input, width=10)
-        entry.grid(row = 6, column = 1, padx = 10, pady = 10)
+        entry.grid(row = listCount + 2, column = 1, padx = 10, pady = 10)
+        # TODO: screenkeyboard when clicked on entry
 
         # add button with image
 
@@ -243,7 +245,7 @@ class tasksPage(tk.Frame):
         addBtn = ttk.Button(self, style = "btn.TButton",
                             image = add_icon, command = addTasks)
         addBtn.image = add_icon
-        addBtn.grid(row = 6, column = 2)
+        addBtn.grid(row = listCount + 2, column = 2)
 
         # add Catcobot image
         image_path = "images/Cactobot_small.png"
