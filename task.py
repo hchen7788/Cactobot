@@ -58,7 +58,7 @@ class tasksPage(tk.Frame):
             mixer.music.load(setting.getSelectedMusicPath())
 
             # Set preferred volume
-            mixer.music.set_volume(0.2)
+            mixer.music.set_volume(setting.getSelectedVolumeLevel())
 
             # Play the music
             mixer.music.play()

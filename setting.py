@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
+from tkinter.simpledialog import askfloat
 
 import home
 import task
@@ -9,6 +11,7 @@ LARGEFONT =("Verdana", 35)
 MEDIUMFONT =("Verdana", 25)
 
 selectedMusicPath = "audio/Short_Success_Glockenspiel.mp3" # default is Short_Success_Glockenspiel.mp3
+selectedVolumeLevel = 0.2 # default is 0.2
 
 # settings page window
 class settingsPage(tk.Frame):
@@ -25,6 +28,9 @@ class settingsPage(tk.Frame):
         def changeMusic():
             # TODO @ANNA
             print("change music here")
+
+            # Hide volume menu
+            volumeMenu.grid_remove()
 
             if not musicMenu.winfo_ismapped():
                 musicMenu.grid(row=5, column=2, padx=10, pady=10, sticky=tk.W)
@@ -50,8 +56,27 @@ class settingsPage(tk.Frame):
             # Hide music menu
             musicMenu.grid_remove()
 
+            if not volumeMenu.winfo_ismapped():
+                volumeMenu.grid(row=7, column=2, padx=10, pady=10, sticky=tk.W)
+            else:
+                volumeMenu.grid_remove()
+
+        def incrementVolume():
+            global selectedVolumeLevel
+            selectedVolumeLevel = min(1, selectedVolumeLevel + 0.1)
+            updateVolumeLabel()
+
+        def decrementVolume():
+            global selectedVolumeLevel
+            selectedVolumeLevel = max(0, selectedVolumeLevel - 0.1)
+            updateVolumeLabel()
+
+        def updateVolumeLabel():
+            volumeLabel.config(text=f"Volume: {selectedVolumeLevel:.1f}")
+
         def handleButtonClick(page):
              musicMenu.grid_remove()
+             volumeMenu.grid_remove()
              controller.show_frame(page)
         
         # running program starts here
@@ -113,5 +138,25 @@ class settingsPage(tk.Frame):
         musicMenu.grid(row=5, column=2, padx=10, pady=10, sticky=tk.W)
         musicMenu.grid_remove()
 
+        ################################################
+        # volume menu UI
+        volumeMenu = ttk.Frame(self)
+
+        volumeLabel = ttk.Label(volumeMenu, text=f"Volume: {selectedVolumeLevel:.1f}", font=MEDIUMFONT)
+        volumeLabel.grid(row=0, column=0, padx=10, pady=10)
+
+        incrementButton = ttk.Button(volumeMenu, text="Increase", command=incrementVolume)
+        incrementButton.grid(row=1, column=0, padx=10, pady=10)
+
+        decrementButton = ttk.Button(volumeMenu, text="Decrease", command=decrementVolume)
+        decrementButton.grid(row=2, column=0, padx=10, pady=10)
+
+        volumeMenu.grid(row=7, column=2, padx=10, pady=10, sticky=tk.W)
+        volumeMenu.grid_remove()
+
+
 def getSelectedMusicPath():
     return selectedMusicPath
+
+def getSelectedVolumeLevel():
+    return selectedVolumeLevel
