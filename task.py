@@ -2,6 +2,9 @@ import tkinter as tk
 from tkinter import ttk
 from functools import partial
 
+import pygame as py
+from pygame import mixer
+
 import home
 import setting
 import help
@@ -46,6 +49,20 @@ class tasksPage(tk.Frame):
         imgStyle = ttk.Style()
         imgStyle.configure('img.TLabel', background = "#77A752")
 
+        # Instantiate mixer
+        mixer.init()
+
+
+        def playSound():
+            # Load audio file
+            mixer.music.load(setting.getSelectedMusicPath())
+
+            # Set preferred volume
+            mixer.music.set_volume(setting.getSelectedVolumeLevel())
+
+            # Play the music
+            mixer.music.play()
+
 
         # helpful functions
         def checkItem(i):
@@ -53,6 +70,10 @@ class tasksPage(tk.Frame):
             checkCount += 1
 
             # TODO: @TANIA @ ANNA send signal to output for one item checked
+
+            # Task complete sound
+            #soundPath = 'audio/Short_Success_Glockenspiel.mp3'
+            playSound()
 
             taskList[i] = (taskList[i][0], "disabled")
             doneList[i].state(["disabled"])
@@ -159,6 +180,11 @@ class tasksPage(tk.Frame):
 
             if(checkCount == listCount):
                 # TODO: @TANIA @ANNA send signal to output for all items checked
+
+                # All tasks completed sound
+                #soundPath = 'audio/Success_Trumpets.mp3'
+                playSound()
+
                 print("All tasks completed. Congrats!")
         
         def addTasks():
