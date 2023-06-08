@@ -29,25 +29,24 @@ class settingsPage(tk.Frame):
 
         # helpful functions
         def changeLightColor():
-            match iterations:
-                case 0:
-                    GPIO.output(GPIORED, 1)
-                    GPIO.output(GPIOGREEN, 0)
-                    GPIO.output(GPIOBLUE, 0)
-                    print("red")
-                    iterations = iterations + 1
-                case 1:
-                    GPIO.output(GPIORED, 0)
-                    GPIO.output(GPIOGREEN, 1)
-                    GPIO.output(GPIOBLUE, 0)
-                    print("green")
-                    iterations = iterations + 1
-                case 2:
-                    GPIO.output(GPIORED, 0)
-                    GPIO.output(GPIOGREEN, 0)
-                    GPIO.output(GPIOBLUE, 1)
-                    print("blue")
-                    iterations = 0
+            if (iterations == 0):
+                GPIO.output(GPIORED, 1)
+                GPIO.output(GPIOGREEN, 0)
+                GPIO.output(GPIOBLUE, 0)
+                print("red")
+                iterations = iterations + 1
+            elif (iterations == 1):
+                GPIO.output(GPIORED, 0)
+                GPIO.output(GPIOGREEN, 1)
+                GPIO.output(GPIOBLUE, 0)
+                print("green")
+                iterations = iterations + 1
+            else:
+                GPIO.output(GPIORED, 0)
+                GPIO.output(GPIOGREEN, 0)
+                GPIO.output(GPIOBLUE, 1)
+                print("blue")
+                iterations = 0
 
         def changeMusic():
             # TODO @ANNA
