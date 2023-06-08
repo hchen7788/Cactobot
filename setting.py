@@ -19,9 +19,9 @@ class settingsPage(tk.Frame):
         #set led pin, can change later
 
         # define GPIO mode
-        GPIORED = 1  # red
-        GPIOGREEN = 4  # green
-        GPIOBLUE = 5  # blue
+        GPIORED = 11  # red
+        GPIOGREEN = 13  # green
+        GPIOBLUE = 15  # blue
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(GPIORED, GPIO.OUT)
         GPIO.setup(GPIOGREEN, GPIO.OUT)
