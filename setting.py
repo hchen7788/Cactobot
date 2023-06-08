@@ -53,15 +53,15 @@ class settingsPage(tk.Frame):
         helpBtn = ttk.Button(self, text = "HELP", style = 'btn.TButton', image = help_icon, 
                              command = lambda : controller.show_frame(help.helpPage))
         helpBtn.image = help_icon
-        helpBtn.grid(row = 2, column = 2, padx = 10, pady = 10, sticky=tk.SE)
+        helpBtn.grid(row = 4, column = 2, padx = 10, pady = 10, sticky=tk.SE)
 
 
         # lay out 3 settings button
         lightBtn = ttk.Button(self, text = "Light Color", style = 'btn.TButton', command = changeLightColor)
         musicBtn = ttk.Button(self, text = "Music", style = 'btn.TButton', command = changeMusic)
         volumeBtn = ttk.Button(self, text = "Volume Level", style = 'btn.TButton', command = changeVolumeLevel)
-        lightBtn.grid(row = 3, column = 1, padx = 10, pady = 10)
-        musicBtn.grid(row = 5, column = 1, padx = 10, pady = 10)
-        volumeBtn.grid(row = 7, column = 1, padx = 10, pady = 10)
+        lightBtn.grid(row = 1, column = 0, padx = 10, pady = 10)
+        musicBtn.grid(row = 2, column = 0, padx = 10, pady = 10)
+        volumeBtn.grid(row = 3, column = 0, padx = 10, pady = 10)
   
   
