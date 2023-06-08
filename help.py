@@ -29,6 +29,13 @@ class helpPage(tk.Frame):
         settingBtn.image = setting_icon
         settingBtn.grid(row = 0, column = 2, padx = 10, pady = 10, sticky = tk.NE)
 
+        task_icon_path = "images/task_icon.png"
+        task_icon = tk.PhotoImage(file = task_icon_path)
+        taskBtn = ttk.Button(self, text ="TASK", style = 'btn.TButton', image = task_icon,
+                                command = lambda : controller.show_frame(task.tasksPage))
+        taskBtn.image = task_icon
+        taskBtn.grid(row = 2, column = 0, padx = 10, pady = 10, sticky = tk.SW)
+
         # putting help button to link to help page
         help_icon_path = "images/help_icon.png"
         help_icon = tk.PhotoImage(file = help_icon_path)
