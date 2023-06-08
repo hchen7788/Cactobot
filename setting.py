@@ -80,8 +80,13 @@ class settingsPage(tk.Frame):
         
         # running program starts here
         tk.Frame.__init__(self, parent)
-        label = ttk.Label(self, text ="Settings", font = LARGEFONT, background = "#77A752")
+        label = ttk.Label(self, text ="Settings", font = LARGEFONT,
+                          width = 20, background = "#77A752", anchor="center")
         label.grid(row = 0, column = 1, padx = 10, pady = 10)
+
+        padding_right = ttk.Label(self, text ="", font = LARGEFONT,
+                          width = 7, background = "#77A752", anchor="center")
+        padding_right.grid(row = 0, column = 2, padx = 10, pady = 10)
   
         # putting the home and settings button
         home_icon_path = "images/home_icon.png"
@@ -126,8 +131,17 @@ class settingsPage(tk.Frame):
         musicBtn = ttk.Button(self, text = "Music", style = 'settingBtn.TButton', command = changeMusic)
         volumeBtn = ttk.Button(self, text = "Volume Level", style = 'settingBtn.TButton', command = changeVolumeLevel)
         
+        paddingBtnStyle = ttk.Style()
+        paddingBtnStyle.configure('paddingBtn.TButton', foreground = "black", background = "#D9E9CD",
+                           highlightthickness = 0, width = 15, borderwidth = 0, font = MEDIUMFONT)
+
+        # paddingBtn1 = ttk.Button(self, text = "", style = 'paddingBtn.TButton')
+        # paddingBtn2 = ttk.Button(self, text = "", style = 'paddingBtn.TButton')
+
         lightBtn.grid(row = 1, column = 0, padx = 10, pady = 10)
+        # paddingBtn1.grid(row = 2, column = 0, padx = 10, pady = 10)
         musicBtn.grid(row = 2, column = 0, padx = 10, pady = 10)
+        # paddingBtn2.grid(row = 4, column = 0, padx = 10, pady = 10)
         volumeBtn.grid(row = 3, column = 0, padx = 10, pady = 10)
 
         ################################################
@@ -150,7 +164,7 @@ class settingsPage(tk.Frame):
         selectButton = ttk.Button(musicMenu, text="Select", command=selectMusic)
         selectButton.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
 
-        musicMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W)
+        musicMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W, rowspan = 3)
         musicMenu.grid_remove()
 
         ################################################
@@ -177,7 +191,7 @@ class settingsPage(tk.Frame):
                                      style = "volBtn.TButton", command=decrementVolume)
         decrementButton.grid(row=2, column=0, padx=10, pady=10)
 
-        volumeMenu.grid(row=3, column=1, padx=10, pady=10, sticky=tk.W)
+        volumeMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W, rowspan = 3)
         volumeMenu.grid_remove()
 
 
