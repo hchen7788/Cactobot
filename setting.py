@@ -35,7 +35,7 @@ class settingsPage(tk.Frame):
             volumeMenu.grid_remove()
 
             if not musicMenu.winfo_ismapped():
-                musicMenu.grid(row=3, column=1, padx=10, pady=10, sticky=tk.W)
+                musicMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W)
             else:
                 musicMenu.grid_remove()
 
@@ -59,7 +59,7 @@ class settingsPage(tk.Frame):
             musicMenu.grid_remove()
 
             if not volumeMenu.winfo_ismapped():
-                volumeMenu.grid(row=3, column=1, padx=10, pady=10, sticky=tk.W)
+                volumeMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W)
             else:
                 volumeMenu.grid_remove()
 
@@ -154,7 +154,7 @@ class settingsPage(tk.Frame):
                              font = MEDIUMFONT)
         introLabel = ttk.Label(self, text = "Customize your Cactobot here!\nPress a button on the left to begin",
                                style = "introLabel.TLabel", anchor="center")
-        introLabel.grid(row = 1, column = 1, padx = 10, pady = 10, rowspan = 2)
+        introLabel.grid(row = 1, column = 1, padx = 10, pady = 10)
 
         # dummy padding bottom
         dummyStyle = ttk.Style()
@@ -175,7 +175,7 @@ class settingsPage(tk.Frame):
         musicOptions = ["Deep Bell", "Short Success", "Success Trumpets"]
         musicPaths = ["audio/Deep_Bell.mp3", "audio/Short_Success_Glockenspiel.mp3", "audio/Success_Trumpets.mp3"]
 
-        musicListbox = tk.Listbox(musicMenu, width=25, selectmode=tk.SINGLE,
+        musicListbox = tk.Listbox(musicMenu, width=28, height = 7, selectmode=tk.SINGLE,
                                   background='#D9E9CD', font = MEDIUMFONT)
         scrollbar = tk.Scrollbar(musicMenu, orient=tk.VERTICAL, command=musicListbox.yview)
         musicListbox.config(yscrollcommand=scrollbar.set)
@@ -198,7 +198,8 @@ class settingsPage(tk.Frame):
         volumeMenu = ttk.Frame(self, style = 'audioMenu.TFrame')
 
         volumeLabel = ttk.Label(volumeMenu, text=f"Volume: {selectedVolumeLevel:.1f}",
-                                font=LARGEFONT, background = "#96BF76")
+                                font=LARGEFONT, background = "#96BF76",
+                                width = 20, anchor = "center")
         volumeLabel.grid(row=0, column=0, padx=10, pady=10)
 
         incrementButton = ttk.Button(volumeMenu, text="Increase",
