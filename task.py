@@ -9,10 +9,11 @@ import home
 import setting
 import help
 
-LARGEFONT =("IBM Plex Sans Thai", 40)
-MEDIUMFONT =("IBM Plex Sans Thai", 30)
-SMALLFONT =("IBM Plex Sans Thai", 15)
-BTNFONT =("IBM Plex Sans Thai", 35)
+HEADERFONT = ("Verdana", 45)
+LARGEFONT =("Verdana", 35)
+MEDIUMFONT =("Verdana", 25)
+SMALLFONT =("Verdana", 15)
+BTNFONT =("Verdana", 35)
 
 taskList = [("Brush your teeth", "!disabled"), ("Wash your face", "!disabled"), ("Take medication", "!disabled"), ("Eat and hydrate", "!disabled")]
 deleteList = []
@@ -36,7 +37,7 @@ class tasksPage(tk.Frame):
         labelStyle = ttk.Style()
         labelStyle.theme_use('classic')
         labelStyle.configure('task.TLabel', foreground = "white", background="#B8906A",
-                             height = 15, width = 20, font = MEDIUMFONT)
+                             height = 15, width = 28, font = LARGEFONT)
         
         btnStyle = ttk.Style()
         btnStyle.configure('btn.TButton', foreground = "black", background = "#77A752", borderwidth=0)
@@ -44,7 +45,7 @@ class tasksPage(tk.Frame):
         #              foreground=[('pressed', 'red'), ('active', 'blue')])
 
         entryStyle = ttk.Style()
-        entryStyle.configure('entry.TEntry', font = MEDIUMFONT)
+        entryStyle.configure('entry.TEntry', font = LARGEFONT)
 
         imgStyle = ttk.Style()
         imgStyle.configure('img.TLabel', background = "#77A752")
@@ -178,6 +179,13 @@ class tasksPage(tk.Frame):
                 deleteList.append(deleteBtn)
 
                 r += 1
+            
+            # display everything lower than the list
+            entry.grid(row = listCount + 2, column = 1, padx = 10, pady = 10)
+            # TODO: screenkeyboard when clicked on entry
+            addBtn.grid(row = listCount + 2, column = 2)
+            imageLabel.grid(row = listCount + 2, column = 0, sticky = tk.SW, padx = 10, pady = 0)
+            helpBtn.grid(row = listCount + 2, column = 5, padx = 10, pady = 10, sticky=tk.SE)
 
             if(checkCount == listCount):
                 # TODO: @TANIA @ANNA send signal to output for all items checked
@@ -202,6 +210,24 @@ class tasksPage(tk.Frame):
 
         # running program starts here
         tk.Frame.__init__(self, parent)
+
+        # things to reuse
+        image_path = "images/Cactobot_small.png"
+        image = tk.PhotoImage(file=image_path)
+        # image = image.resize((100, 100))
+        # Create a label widget and set the image
+        imageLabel = ttk.Label(self, image=image, style = 'img.TLabel', width = 100)
+        imageLabel.image = image  # Keep a reference to the image
+
+        entry = ttk.Entry(self, textvariable = input, width=10)
+
+        # add button with image
+        add_icon_path = "images/add_icon.png"
+        add_icon = tk.PhotoImage(file = add_icon_path)
+        addBtn = ttk.Button(self, style = "btn.TButton",
+                        image = add_icon, command = addTasks)
+        addBtn.image = add_icon
+
         # putting the home and settings button
         home_icon_path = "images/home_icon.png"
         home_icon = tk.PhotoImage(file = home_icon_path)
@@ -223,37 +249,49 @@ class tasksPage(tk.Frame):
         helpBtn = ttk.Button(self, text = "HELP", style = 'btn.TButton', image = help_icon, 
                              command = lambda : controller.show_frame(help.helpPage))
         helpBtn.image = help_icon
-        helpBtn.grid(row = 6, column = 5, padx = 10, pady = 10, sticky=tk.SE)
 
+        # # dummy padding bottom
+        # dummyStyle = ttk.Style()
+        # dummyStyle.configure('dummyLabel.TLabel', background = "black", foreground = "#77A752")
+        # dummyLabel1 = ttk.Label(self, text = "x\nx\nx\nx\nx\nx\nx",
+        #                        style = "dummyLabel.TLabel")
+        # dummyLabel1.grid(row = 6, column = 5, padx = 10, pady = 10, sticky=tk.E)
+        # dummyLabel2 = ttk.Label(self, text = "x\nx\nx\nx\nx\nx\nx\nx",
+        #                        style = "dummyLabel.TLabel")
+        # dummyLabel2.grid(row = 2, column = 2, padx = 10, pady = 10, sticky=tk.E)
+        # dummyLabel3 = ttk.Label(self, text = "x\nx\nx\nx\nx\nx\nx\nx",
+        #                        style = "dummyLabel.TLabel")
+        # dummyLabel3.grid(row = 3, column = 2, padx = 10, pady = 10, sticky=tk.E)
 
         # put header text
-        label = ttk.Label(self, text ="Here are today's tasks", font = LARGEFONT, background = "#77A752")
+        label = ttk.Label(self, text ="Here are today's tasks", font = HEADERFONT,
+                          width = 20, anchor="center", background = "#77A752")
         label.grid(row = 0, column = 1, padx = 10, pady = 10)
 
         # lay out default checklist items
         displayList()
 
-        entry = ttk.Entry(self, textvariable = input, width=10)
-        entry.grid(row = listCount + 2, column = 1, padx = 10, pady = 10)
-        # TODO: screenkeyboard when clicked on entry
+        # entry = ttk.Entry(self, textvariable = input, width=10)
+        # entry.grid(row = listCount + 2, column = 1, padx = 10, pady = 10)
+        # # TODO: screenkeyboard when clicked on entry
 
-        # add button with image
+        # # add button with image
 
-        # Creating a photoimage object to use image
-        add_icon_path = "images/add_icon.png"
-        add_icon = tk.PhotoImage(file = add_icon_path)
-        addBtn = ttk.Button(self, style = "btn.TButton",
-                            image = add_icon, command = addTasks)
-        addBtn.image = add_icon
-        addBtn.grid(row = listCount + 2, column = 2)
+        # # Creating a photoimage object to use image
+        # add_icon_path = "images/add_icon.png"
+        # add_icon = tk.PhotoImage(file = add_icon_path)
+        # addBtn = ttk.Button(self, style = "btn.TButton",
+        #                     image = add_icon, command = addTasks)
+        # addBtn.image = add_icon
+        # addBtn.grid(row = listCount + 2, column = 2)
 
-        # add Catcobot image
-        image_path = "images/Cactobot_small.png"
-        image = tk.PhotoImage(file=image_path)
-        # image = image.resize((100, 100))
-        # Create a label widget and set the image
-        imageLabel = ttk.Label(self, image=image, style = 'img.TLabel', width = 100)
-        imageLabel.image = image  # Keep a reference to the image
-        imageLabel.grid(row = 6, column = 0, sticky = tk.SW, padx = 10, pady = 0)
+        # # add Catcobot image
+        # image_path = "images/Cactobot_small.png"
+        # image = tk.PhotoImage(file=image_path)
+        # # image = image.resize((100, 100))
+        # # Create a label widget and set the image
+        # imageLabel = ttk.Label(self, image=image, style = 'img.TLabel', width = 100)
+        # imageLabel.image = image  # Keep a reference to the image
+        # imageLabel.grid(row = 6, column = 0, sticky = tk.SW, padx = 10, pady = 0)
 
         

@@ -5,8 +5,11 @@ import home
 import task
 import help
 
+HEADERFONT = ("Verdana", 45)
 LARGEFONT =("Verdana", 35)
 MEDIUMFONT =("Verdana", 25)
+SMALLFONT =("Verdana", 15)
+BTNFONT =("Verdana", 35)
 
 selectedMusicPath = "audio/Short_Success_Glockenspiel.mp3" # default is Short_Success_Glockenspiel.mp3
 selectedVolumeLevel = 0.2 # default is 0.2
@@ -80,8 +83,8 @@ class settingsPage(tk.Frame):
         
         # running program starts here
         tk.Frame.__init__(self, parent)
-        label = ttk.Label(self, text ="Settings", font = LARGEFONT,
-                          width = 20, background = "#77A752", anchor="center")
+        label = ttk.Label(self, text ="Settings", font = HEADERFONT,
+                          width = 16, background = "#77A752", anchor="center")
         label.grid(row = 0, column = 1, padx = 10, pady = 10)
 
         padding_right = ttk.Label(self, text ="", font = LARGEFONT,
@@ -158,7 +161,7 @@ class settingsPage(tk.Frame):
         introStyle = ttk.Style()
         introStyle.configure('introLabel.TLabel', background = "#77A752",
                              font = MEDIUMFONT)
-        introLabel = ttk.Label(self, text = "Customize your Cactobot here!\nPress one of the buttons to begin\nYou can do 3 options",
+        introLabel = ttk.Label(self, text = "Customize your Cactobot here!\nPress one of the buttons to begin",
                                style = "introLabel.TLabel")
         introLabel.grid(row = 1, column = 1, padx = 10, pady = 10, rowspan = 2)
 
