@@ -32,7 +32,7 @@ class settingsPage(tk.Frame):
             volumeMenu.grid_remove()
 
             if not musicMenu.winfo_ismapped():
-                musicMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W)
+                musicMenu.grid(row=3, column=1, padx=10, pady=10, sticky=tk.W)
             else:
                 musicMenu.grid_remove()
 
@@ -109,7 +109,7 @@ class settingsPage(tk.Frame):
         taskBtn = ttk.Button(self, text ="TASK", style = 'btn.TButton', image = task_icon,
                                 command = lambda : controller.show_frame(task.tasksPage))
         taskBtn.image = task_icon
-        taskBtn.grid(row = 4, column = 0, padx = 10, pady = 10, sticky = tk.SW)
+        taskBtn.grid(row = 5, column = 0, padx = 10, pady = 10, sticky = tk.SW)
         
         # putting help button to link to help page
         help_icon_path = "images/help_icon.png"
@@ -118,7 +118,7 @@ class settingsPage(tk.Frame):
                              command = lambda: handleButtonClick(help.helpPage))
         helpBtn.image = help_icon
 
-        helpBtn.grid(row = 4, column = 3, padx = 10, pady = 10, sticky=tk.SE)
+        helpBtn.grid(row = 5, column = 3, padx = 10, pady = 10, sticky=tk.SE)
 
         settingBtnStyle = ttk.Style()
         settingBtnStyle.theme_use('classic')
@@ -131,27 +131,61 @@ class settingsPage(tk.Frame):
         musicBtn = ttk.Button(self, text = "Music", style = 'settingBtn.TButton', command = changeMusic)
         volumeBtn = ttk.Button(self, text = "Volume Level", style = 'settingBtn.TButton', command = changeVolumeLevel)
         
-        paddingBtnStyle = ttk.Style()
-        paddingBtnStyle.configure('paddingBtn.TButton', foreground = "black", background = "#D9E9CD",
-                           highlightthickness = 0, width = 15, borderwidth = 0, font = MEDIUMFONT)
+        # paddingBtnStyle = ttk.Style()
+        # paddingBtnStyle.configure('paddingBtn.TButton', foreground = "black", background = "#D9E9CD",
+        #                    highlightthickness = 0, width = 15, borderwidth = 0, font = MEDIUMFONT)
 
         # paddingBtn1 = ttk.Button(self, text = "", style = 'paddingBtn.TButton')
         # paddingBtn2 = ttk.Button(self, text = "", style = 'paddingBtn.TButton')
 
         lightBtn.grid(row = 1, column = 0, padx = 10, pady = 10)
-        # paddingBtn1.grid(row = 2, column = 0, padx = 10, pady = 10)
         musicBtn.grid(row = 2, column = 0, padx = 10, pady = 10)
         # paddingBtn2.grid(row = 4, column = 0, padx = 10, pady = 10)
         volumeBtn.grid(row = 3, column = 0, padx = 10, pady = 10)
+        # paddingBtn1.grid(row = 4, column = 0, padx = 10, pady = 10, rowspan = 2)
 
         ################################################
+
+        # style for music and volume frame
+        frameStyle = ttk.Style()
+        frameStyle.configure('audioMenu.TFrame', background='#96BF76')
+
+        audioBtnStyle = ttk.Style()
+        audioBtnStyle.configure('audioBtn.TButton', background='#D9E9CD',
+                              highlightthickness = 0, borderwidth = 0, font = MEDIUMFONT)
+
+        # intro message label display
+        introStyle = ttk.Style()
+        introStyle.configure('introLabel.TLabel', background = "#77A752",
+                             font = MEDIUMFONT)
+        introLabel = ttk.Label(self, text = "Customize your Cactobot here!\nPress one of the buttons to begin\nYou can do 3 options",
+                               style = "introLabel.TLabel")
+        introLabel.grid(row = 1, column = 1, padx = 10, pady = 10, rowspan = 2)
+
+        # dummy padding bottom
+        dummyStyle = ttk.Style()
+        dummyStyle.configure('dummyLabel.TLabel', background = "#77A752", foreground = "#77A752")
+        dummyLabel1 = ttk.Label(self, text = "x\nx\nx\nx\nx\nx\nx\n",
+                               style = "dummyLabel.TLabel")
+        dummyLabel1.grid(row = 1, column = 2, padx = 10, pady = 10, sticky=tk.E)
+        dummyLabel2 = ttk.Label(self, text = "x\nx\nx\nx\nx\nx\nx\nx",
+                               style = "dummyLabel.TLabel")
+        dummyLabel2.grid(row = 2, column = 2, padx = 10, pady = 10, sticky=tk.E)
+        dummyLabel3 = ttk.Label(self, text = "x\nx\nx\nx\nx\nx\nx\nx",
+                               style = "dummyLabel.TLabel")
+        dummyLabel3.grid(row = 3, column = 2, padx = 10, pady = 10, sticky=tk.E)
+        # dummyLabel4 = ttk.Label(self, text = "x",
+        #                        style = "dummyLabel.TLabel")
+        # dummyLabel4.grid(row = 4, column = 2, padx = 10, pady = 10, sticky=tk.E)
+
         # music button clicked UI
-        musicMenu = ttk.Frame(self)
+        musicMenu = ttk.Frame(self, style = 'audioMenu.TFrame')
 
         musicOptions = ["Deep Bell", "Short Success", "Success Trumpets"]
         musicPaths = ["audio/Deep_Bell.mp3", "audio/Short_Success_Glockenspiel.mp3", "audio/Success_Trumpets.mp3"]
 
-        musicListbox = tk.Listbox(musicMenu, width=20, selectmode=tk.SINGLE)
+        musicListbox = tk.Listbox(musicMenu, width=25, selectmode=tk.SINGLE,
+                                  background='#D9E9CD', font = MEDIUMFONT)
         scrollbar = tk.Scrollbar(musicMenu, orient=tk.VERTICAL, command=musicListbox.yview)
         musicListbox.config(yscrollcommand=scrollbar.set)
         
@@ -161,7 +195,8 @@ class settingsPage(tk.Frame):
         musicListbox.grid(row=0, column=0, sticky=tk.NSEW)
         scrollbar.grid(row=0, column=1, sticky=tk.NS)
 
-        selectButton = ttk.Button(musicMenu, text="Select", command=selectMusic)
+        selectButton = ttk.Button(musicMenu, text="Select", command=selectMusic,
+                                  style = "audioBtn.TButton")
         selectButton.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
 
         musicMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W, rowspan = 3)
@@ -169,26 +204,18 @@ class settingsPage(tk.Frame):
 
         ################################################
         # volume menu UI
-
-        frameStyle = ttk.Style()
-        frameStyle.configure('volumeMenu.TFrame', background='#96BF76')
-
-        volumeMenu = ttk.Frame(self, style = 'volumeMenu.TFrame')
+        volumeMenu = ttk.Frame(self, style = 'audioMenu.TFrame')
 
         volumeLabel = ttk.Label(volumeMenu, text=f"Volume: {selectedVolumeLevel:.1f}",
                                 font=LARGEFONT, background = "#96BF76")
         volumeLabel.grid(row=0, column=0, padx=10, pady=10)
 
-        volBtnStyle = ttk.Style()
-        volBtnStyle.configure('volBtn.TButton', background='#D9E9CD',
-                              highlightthickness = 0, borderwidth = 0, font = MEDIUMFONT)
-
         incrementButton = ttk.Button(volumeMenu, text="Increase",
-                                     style = "volBtn.TButton", command=incrementVolume)
+                                     style = "audioBtn.TButton", command=incrementVolume)
         incrementButton.grid(row=1, column=0, padx=10, pady=10)
 
         decrementButton = ttk.Button(volumeMenu, text="Decrease",
-                                     style = "volBtn.TButton", command=decrementVolume)
+                                     style = "audioBtn.TButton", command=decrementVolume)
         decrementButton.grid(row=2, column=0, padx=10, pady=10)
 
         volumeMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W, rowspan = 3)
