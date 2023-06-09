@@ -7,9 +7,11 @@ import setting
 import task
 import help
 
-LARGEFONT =("Hind", 55)
-MEDIUMFONT =("IM FELL Great Primer", 35)
-SMALLFONT =("IM FELL Great Primer", 15)
+HEADERFONT = ("Verdana", 45)
+LARGEFONT =("Verdana", 35)
+MEDIUMFONT =("Verdana", 25)
+SMALLFONT =("Verdana", 15)
+BTNFONT =("Verdana", 35)
 
 # first window frame startpage
 class homePage(tk.Frame):

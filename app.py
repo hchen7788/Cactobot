@@ -52,7 +52,7 @@ class tkinterApp(tk.Tk):
 
 # Driver Code
 app = tkinterApp()
-app.geometry("800x480")
+app.geometry("1024x600")
 app.title("Cactobot")
 
 app.mainloop()

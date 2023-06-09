@@ -5,8 +5,11 @@ import setting
 import task
 import home
 
+HEADERFONT = ("Verdana", 45)
 LARGEFONT =("Verdana", 35)
 MEDIUMFONT =("Verdana", 25)
+SMALLFONT =("Verdana", 15)
+BTNFONT =("Verdana", 35)
 
 # first window frame startpage
 class helpPage(tk.Frame):
@@ -43,9 +46,10 @@ class helpPage(tk.Frame):
                              command = lambda : controller.show_frame(helpPage))
         helpBtn.image = help_icon
         helpBtn.grid(row = 2, column = 2, padx = 10, pady = 10, sticky=tk.SE)
-  
+
         # label of header
         label = ttk.Label(self, text ="Here's how to use your Catcobot",
-                          font = LARGEFONT, background = "#77A752")
+                          font = LARGEFONT, background = "#77A752",
+                          width = 37, anchor="center")
         # putting the grid in its place by using grid
         label.grid(row = 0, column = 1, padx = 10, pady = 10)
