@@ -30,6 +30,7 @@ class settingsPage(tk.Frame):
         def changeMusic():
             # TODO @ANNA
             print("change music here")
+            introLabel['text'] = "Pick a sound to celebrate\ncompleting a task!"
 
             # Hide volume menu
             volumeMenu.grid_remove()
@@ -38,6 +39,7 @@ class settingsPage(tk.Frame):
                 musicMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W)
             else:
                 musicMenu.grid_remove()
+                introLabel['text'] = "Customize your Cactobot here!\nPress a button on the left to begin"
 
         def selectMusic():
             selectedIndices = musicListbox.curselection()
@@ -54,6 +56,7 @@ class settingsPage(tk.Frame):
         def changeVolumeLevel():
             # TODO @ANNA
             print("change volume level here")
+            introLabel['text'] = "Set the volume of your Cactobot!"
 
             # Hide music menu
             musicMenu.grid_remove()
@@ -62,6 +65,7 @@ class settingsPage(tk.Frame):
                 volumeMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W)
             else:
                 volumeMenu.grid_remove()
+                introLabel['text'] = "Customize your Cactobot here!\nPress a button on the left to begin"
 
         def incrementVolume():
             global selectedVolumeLevel
@@ -75,11 +79,12 @@ class settingsPage(tk.Frame):
 
         def updateVolumeLabel():
             volumeLabel.config(text=f"Volume: {selectedVolumeLevel:.1f}")
+            introLabel['text'] = "Customize your Cactobot here!\nPress a button on the left to begin"
 
         def handleButtonClick(page):
-             musicMenu.grid_remove()
-             volumeMenu.grid_remove()
-             controller.show_frame(page)
+            musicMenu.grid_remove()
+            volumeMenu.grid_remove()
+            controller.show_frame(page)
         
         # running program starts here
         tk.Frame.__init__(self, parent)
@@ -152,7 +157,7 @@ class settingsPage(tk.Frame):
         introStyle = ttk.Style()
         introStyle.configure('introLabel.TLabel', background = "#77A752",
                              font = MEDIUMFONT)
-        introLabel = ttk.Label(self, text = "Customize your Cactobot here!\nPress a button on the left to begin",
+        introLabel = ttk.Label(self, text = "Customize your Cactobot here!\nPress a button on the left to begin!",
                                style = "introLabel.TLabel", anchor="center")
         introLabel.grid(row = 1, column = 1, padx = 10, pady = 10)
 
