@@ -250,19 +250,6 @@ class tasksPage(tk.Frame):
                              command = lambda : controller.show_frame(help.helpPage))
         helpBtn.image = help_icon
 
-        # # dummy padding bottom
-        # dummyStyle = ttk.Style()
-        # dummyStyle.configure('dummyLabel.TLabel', background = "black", foreground = "#77A752")
-        # dummyLabel1 = ttk.Label(self, text = "x\nx\nx\nx\nx\nx\nx",
-        #                        style = "dummyLabel.TLabel")
-        # dummyLabel1.grid(row = 6, column = 5, padx = 10, pady = 10, sticky=tk.E)
-        # dummyLabel2 = ttk.Label(self, text = "x\nx\nx\nx\nx\nx\nx\nx",
-        #                        style = "dummyLabel.TLabel")
-        # dummyLabel2.grid(row = 2, column = 2, padx = 10, pady = 10, sticky=tk.E)
-        # dummyLabel3 = ttk.Label(self, text = "x\nx\nx\nx\nx\nx\nx\nx",
-        #                        style = "dummyLabel.TLabel")
-        # dummyLabel3.grid(row = 3, column = 2, padx = 10, pady = 10, sticky=tk.E)
-
         # put header text
         label = ttk.Label(self, text ="Here are today's tasks", font = HEADERFONT,
                           width = 20, anchor="center", background = "#77A752")

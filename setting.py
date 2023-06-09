@@ -133,19 +133,10 @@ class settingsPage(tk.Frame):
         lightBtn = ttk.Button(self, text = "Light Color", style = 'settingBtn.TButton', command = changeLightColor)
         musicBtn = ttk.Button(self, text = "Music", style = 'settingBtn.TButton', command = changeMusic)
         volumeBtn = ttk.Button(self, text = "Volume Level", style = 'settingBtn.TButton', command = changeVolumeLevel)
-        
-        # paddingBtnStyle = ttk.Style()
-        # paddingBtnStyle.configure('paddingBtn.TButton', foreground = "black", background = "#D9E9CD",
-        #                    highlightthickness = 0, width = 15, borderwidth = 0, font = MEDIUMFONT)
-
-        # paddingBtn1 = ttk.Button(self, text = "", style = 'paddingBtn.TButton')
-        # paddingBtn2 = ttk.Button(self, text = "", style = 'paddingBtn.TButton')
 
         lightBtn.grid(row = 1, column = 0, padx = 10, pady = 10)
         musicBtn.grid(row = 2, column = 0, padx = 10, pady = 10)
-        # paddingBtn2.grid(row = 4, column = 0, padx = 10, pady = 10)
         volumeBtn.grid(row = 3, column = 0, padx = 10, pady = 10)
-        # paddingBtn1.grid(row = 4, column = 0, padx = 10, pady = 10, rowspan = 2)
 
         ################################################
 
@@ -161,8 +152,8 @@ class settingsPage(tk.Frame):
         introStyle = ttk.Style()
         introStyle.configure('introLabel.TLabel', background = "#77A752",
                              font = MEDIUMFONT)
-        introLabel = ttk.Label(self, text = "Customize your Cactobot here!\nPress one of the buttons to begin",
-                               style = "introLabel.TLabel")
+        introLabel = ttk.Label(self, text = "Customize your Cactobot here!\nPress a button on the left to begin",
+                               style = "introLabel.TLabel", anchor="center")
         introLabel.grid(row = 1, column = 1, padx = 10, pady = 10, rowspan = 2)
 
         # dummy padding bottom
@@ -177,9 +168,6 @@ class settingsPage(tk.Frame):
         dummyLabel3 = ttk.Label(self, text = "x\nx\nx\nx\nx\nx\nx\nx",
                                style = "dummyLabel.TLabel")
         dummyLabel3.grid(row = 3, column = 2, padx = 10, pady = 10, sticky=tk.E)
-        # dummyLabel4 = ttk.Label(self, text = "x",
-        #                        style = "dummyLabel.TLabel")
-        # dummyLabel4.grid(row = 4, column = 2, padx = 10, pady = 10, sticky=tk.E)
 
         # music button clicked UI
         musicMenu = ttk.Frame(self, style = 'audioMenu.TFrame')
