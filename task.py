@@ -2,14 +2,18 @@ import tkinter as tk
 from tkinter import ttk
 from functools import partial
 
+#import pygame as py
+#from pygame import mixer
+
 import home
 import setting
 import help
-import RPi.GPIO as GPIO
 
-LARGEFONT =("IBM Plex Sans Thai", 35)
-MEDIUMFONT =("IBM Plex Sans Thai", 25)
-SMALLFONT =("IBM Plex Sans Thai", 15)
+HEADERFONT = ("Verdana", 45)
+LARGEFONT =("Verdana", 35)
+MEDIUMFONT =("Verdana", 25)
+SMALLFONT =("Verdana", 15)
+BTNFONT =("Verdana", 35)
 
 taskList = [("Brush your teeth", "!disabled"), ("Wash your face", "!disabled"), ("Take medication", "!disabled"), ("Eat and hydrate", "!disabled")]
 deleteList = []
@@ -18,6 +22,7 @@ doneList = []
 editList = []
 checkCount = 0
 listCount = len(taskList)
+color = "white"
 
 
 # tasks page window
@@ -25,13 +30,13 @@ class tasksPage(tk.Frame):
 
     def __init__(self, parent, controller):
         # define GPIO mode
-        GPIORED = 11  # red
-        GPIOGREEN = 13  # green
-        GPIOBLUE = 15  # blue
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(GPIORED, GPIO.OUT)
-        GPIO.setup(GPIOGREEN, GPIO.OUT)
-        GPIO.setup(GPIOBLUE, GPIO.OUT)
+        #GPIORED = 11  # red
+        #GPIOGREEN = 13  # green
+        #GPIOBLUE = 15  # blue
+        #GPIO.setmode(GPIO.BCM)
+        #GPIO.setup(GPIORED, GPIO.OUT)
+        #GPIO.setup(GPIOGREEN, GPIO.OUT)
+        #GPIO.setup(GPIOBLUE, GPIO.OUT)
 
         # variables
         input = tk.StringVar()
@@ -41,16 +46,32 @@ class tasksPage(tk.Frame):
         labelStyle = ttk.Style()
         labelStyle.theme_use('classic')
         labelStyle.configure('task.TLabel', foreground = "white", background="#B8906A",
-                             height = 15, width = 20, font = MEDIUMFONT)
+                             height = 15, width = 28, font = LARGEFONT)
         
         btnStyle = ttk.Style()
-        btnStyle.configure('btn.TButton', foreground = "black", background = "white", borderwidth=0,
-                           height = 15, width = 8, font = SMALLFONT)
+        btnStyle.configure('btn.TButton', foreground = "black", background = "#77A752", borderwidth=0)
         # btnStyle.map("btn.TButton",
         #              foreground=[('pressed', 'red'), ('active', 'blue')])
 
         entryStyle = ttk.Style()
-        entryStyle.configure('entry.TEntry', font = MEDIUMFONT)
+        entryStyle.configure('entry.TEntry', font = LARGEFONT)
+
+        imgStyle = ttk.Style()
+        imgStyle.configure('img.TLabel', background = "#77A752")
+
+        # Instantiate mixer
+        #mixer.init()
+
+        def playSound():
+            # Load audio file
+            #mixer.music.load(setting.getSelectedMusicPath())
+
+            # Set preferred volume
+            #mixer.music.set_volume(setting.getSelectedVolumeLevel())
+
+            # Play the music
+            #mixer.music.play()
+            print("Playing sound")
 
 
         # helpful functions
@@ -58,16 +79,42 @@ class tasksPage(tk.Frame):
             global checkCount
             checkCount += 1
 
+            #output selectedcolor
+            print("Light is now " + setting.selectedColor)
+            
+            if (setting.selectedColor == "red"):
+                #GPIO.output(GPIORED, GPIO.HIGH)
+                #GPIO.output(GPIOGREEN, GPIO.LOW)
+                #GPIO.output(GPIOBLUE, GPIO.LOW)
+                print("a")
+            elif (setting.selectedColor == "green"):
+                #GPIO.output(GPIORED, GPIO.LOW)
+                #GPIO.output(GPIOGREEN, GPIO.HIGH)
+                #GPIO.output(GPIOBLUE, GPIO.LOW)
+                print("b")
+            elif (setting.selectedColor == "blue"):
+                #GPIO.output(GPIORED, GPIO.LOW)
+                #GPIO.output(GPIOGREEN, GPIO.LOW)
+                #GPIO.output(GPIOBLUE, GPIO.HIGH)
+                print("c")
+            else:
+                #GPIO.output(GPIORED, GPIO.HIGH)
+                #GPIO.output(GPIOGREEN, GPIO.HIGH)
+                #GPIO.output(GPIOBLUE, GPIO.HIGH)
+                print("d")
+
+
             # TODO: @TANIA @ ANNA send signal to output for one item checked
-            GPIO.output(GPIORED, 1)
-            GPIO.output(GPIOGREEN, 1)
-            GPIO.output(GPIOBLUE, 0)
+
+            # Task complete sound
+            #soundPath = 'audio/Short_Success_Glockenspiel.mp3'
+            playSound()
 
             taskList[i] = (taskList[i][0], "disabled")
             doneList[i].state(["disabled"])
             editList[i].state(["disabled"])
 
-            print("Task ", taskList[i][0], " has been completed.")
+            print("task ", taskList[i][0], " completed")
 
             clearScreen()
             displayList()
@@ -85,7 +132,8 @@ class tasksPage(tk.Frame):
             editInput.set(labelList[i].cget('text'))
             labelList[i].destroy()
             entry = ttk.Entry(self, textvariable = editInput, style = 'entry.TEntry', width = 20, font = MEDIUMFONT)
-            entry.grid(row = i + 2, column = 5, padx = 10, pady = 10)
+            entry.grid(row = i + 2, column = 1, padx = 10, pady = 10)
+            # TODO: screenkeyboard when clicked on entry
             editList[i]['command'] = partial(confirmEdit, i, entry)
 
 
@@ -133,32 +181,53 @@ class tasksPage(tk.Frame):
             for item in taskList:
 
                 label = ttk.Label(self, text = item[0], style = 'task.TLabel', anchor = "center")
-                label.grid(row = r, column = 5, padx = 10, pady = 10)
+                label.grid(row = r, column = 1, padx = 10, pady = 10)
                 labelList.append(label)
 
                 
                 # add done button to the left
-                doneBtn = ttk.Button(self, text = "DONE", state = item[1],
+                done_icon_path = "images/check_icon.png"
+                done_icon = tk.PhotoImage(file = done_icon_path)
+                doneBtn = ttk.Button(self, text = "DONE", state = item[1], image = done_icon, 
                                      style = "btn.TButton", command = partial(checkItem, r - 2))
-                doneBtn.grid(row = r, column = 4, padx = 10, pady = 10)
+                doneBtn.image = done_icon
+                doneBtn.grid(row = r, column = 0, padx = 10, pady = 10)
                 doneList.append(doneBtn)
 
-                # add edit button to the right
-                editBtn = ttk.Button(self, text = "EDIT", state = item[1],
-                                     style = "btn.TButton", command = partial(editItem, r - 2))
-                editBtn.grid(row = r, column = 6, padx = 10, pady = 10)
+                # add edit button with icon to the right
+                edit_icon_path = "images/edit_icon.png"
+                edit_icon = tk.PhotoImage(file = edit_icon_path)
+                editBtn = ttk.Button(self, text = "EDIT", state = item[1], style = "btn.TButton",
+                                     image = edit_icon, command = partial(editItem, r - 2))
+                editBtn.image = edit_icon
+                editBtn.grid(row = r, column = 2, padx = 10, pady = 10)
                 editList.append(editBtn)
 
                 # add delete button to the right
-                deleteBtn = ttk.Button(self, text = "DELETE",
+                delete_icon_path = "images/trash_icon.png"
+                delete_icon = tk.PhotoImage(file = delete_icon_path)
+                deleteBtn = ttk.Button(self, text = "-", image = delete_icon,
                                        style = "btn.TButton", command = partial(deleteItem, r - 2))
-                deleteBtn.grid(row = r, column = 7, padx = 10, pady = 10)
+                deleteBtn.image = delete_icon
+                deleteBtn.grid(row = r, column = 3, padx = 10, pady = 10)
                 deleteList.append(deleteBtn)
 
                 r += 1
+            
+            # display everything lower than the list
+            entry.grid(row = listCount + 2, column = 1, padx = 10, pady = 10)
+            # TODO: screenkeyboard when clicked on entry
+            addBtn.grid(row = listCount + 2, column = 2)
+            imageLabel.grid(row = listCount + 2, column = 0, sticky = tk.SW, padx = 10, pady = 0)
+            helpBtn.grid(row = listCount + 2, column = 5, padx = 10, pady = 10, sticky=tk.SE)
 
             if(checkCount == listCount):
                 # TODO: @TANIA @ANNA send signal to output for all items checked
+
+                # All tasks completed sound
+                #soundPath = 'audio/Success_Trumpets.mp3'
+                playSound()
+
                 print("All tasks completed. Congrats!")
         
         def addTasks():
@@ -175,32 +244,75 @@ class tasksPage(tk.Frame):
 
         # running program starts here
         tk.Frame.__init__(self, parent)
-         # putting the home and settings button
-        homeBtn = ttk.Button(self, text="HOME", style = 'btn.TButton',
+
+        # things to reuse
+        image_path = "images/Cactobot_small.png"
+        image = tk.PhotoImage(file=image_path)
+        # image = image.resize((100, 100))
+        # Create a label widget and set the image
+        imageLabel = ttk.Label(self, image=image, style = 'img.TLabel', width = 100)
+        imageLabel.image = image  # Keep a reference to the image
+
+        entry = ttk.Entry(self, textvariable = input, width=10)
+
+        # add button with image
+        add_icon_path = "images/add_icon.png"
+        add_icon = tk.PhotoImage(file = add_icon_path)
+        addBtn = ttk.Button(self, style = "btn.TButton",
+                        image = add_icon, command = addTasks)
+        addBtn.image = add_icon
+
+        # putting the home and settings button
+        home_icon_path = "images/home_icon.png"
+        home_icon = tk.PhotoImage(file = home_icon_path)
+        homeBtn = ttk.Button(self, text="HOME", style = 'btn.TButton', image = home_icon,
                              command = lambda : controller.show_frame(home.homePage))
+        homeBtn.image = home_icon
         homeBtn.grid(row = 0, column = 0, padx = 10, pady = 10, sticky = tk.NW)
 
-        settingBtn = ttk.Button(self, text ="SETTINGS", style = 'btn.TButton',
+        setting_icon_path = "images/setting_icon.png"
+        setting_icon = tk.PhotoImage(file = setting_icon_path)
+        settingBtn = ttk.Button(self, text ="SETTINGS", style = 'btn.TButton', image = setting_icon,
                                 command = lambda : controller.show_frame(setting.settingsPage))
-        settingBtn.grid(row = 0, column = 10, padx = 10, pady = 10, sticky = tk.NE)
+        settingBtn.image = setting_icon
+        settingBtn.grid(row = 0, column = 5, padx = 10, pady = 10, sticky = tk.NE)
 
         # putting help button to link to help page
-        helpBtn = ttk.Button(self, text = "HELP", style = 'btn.TButton',
+        help_icon_path = "images/help_icon.png"
+        help_icon = tk.PhotoImage(file = help_icon_path)
+        helpBtn = ttk.Button(self, text = "HELP", style = 'btn.TButton', image = help_icon, 
                              command = lambda : controller.show_frame(help.helpPage))
-        # helpBtn.grid(row = 9, column = 10, padx = 10, pady = 10)
-        helpBtn.grid(row = 10, column = 10, padx = 10, pady = 10, sticky=tk.SE) 
+        helpBtn.image = help_icon
 
         # put header text
-        label = ttk.Label(self, text ="Here are today's tasks", font = LARGEFONT, background = "#77A752")
-        label.grid(row = 1, column = 5, padx = 10, pady = 10)
+        label = ttk.Label(self, text ="Here are today's tasks", font = HEADERFONT,
+                          width = 20, anchor="center", background = "#77A752")
+        label.grid(row = 0, column = 1, padx = 10, pady = 10)
 
         # lay out default checklist items
         displayList()
 
-        entry = ttk.Entry(self, textvariable = input, width=10)
-        entry.grid(row =9, column = 5, padx = 10, pady = 10)
+        # entry = ttk.Entry(self, textvariable = input, width=10)
+        # entry.grid(row = listCount + 2, column = 1, padx = 10, pady = 10)
+        # # TODO: screenkeyboard when clicked on entry
 
-        addBtn = ttk.Button(self, text = "Add Task", style = "btn.TButton", command = addTasks)
-        addBtn.grid(row = 8, column = 5, padx = 10, pady = 10)
+        # # add button with image
+
+        # # Creating a photoimage object to use image
+        # add_icon_path = "images/add_icon.png"
+        # add_icon = tk.PhotoImage(file = add_icon_path)
+        # addBtn = ttk.Button(self, style = "btn.TButton",
+        #                     image = add_icon, command = addTasks)
+        # addBtn.image = add_icon
+        # addBtn.grid(row = listCount + 2, column = 2)
+
+        # # add Catcobot image
+        # image_path = "images/Cactobot_small.png"
+        # image = tk.PhotoImage(file=image_path)
+        # # image = image.resize((100, 100))
+        # # Create a label widget and set the image
+        # imageLabel = ttk.Label(self, image=image, style = 'img.TLabel', width = 100)
+        # imageLabel.image = image  # Keep a reference to the image
+        # imageLabel.grid(row = 6, column = 0, sticky = tk.SW, padx = 10, pady = 0)
 
         

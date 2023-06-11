@@ -52,6 +52,7 @@ class tkinterApp(tk.Tk):
 
 # Driver Code
 app = tkinterApp()
+app.geometry("1024x600")
 app.title("Cactobot")
 
 app.mainloop()
@@ -152,4 +153,3 @@ app.mainloop()
 
 # # Run forever!
 # root.mainloop()
-
