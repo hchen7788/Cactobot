@@ -26,9 +26,7 @@ class settingsPage(tk.Frame):
             musicMenu.grid_remove() 
             volumeMenu.grid_remove()
             print("Color buttons appearing")
-            redButton.grid(row=2, column=1, padx=10, pady=10, sticky=tk.NW)
-            greenButton.grid(row=2, column=1, padx=200, pady=10, sticky=tk.NW)
-            blueButton.grid(row=2, column=1, padx=400, pady=10, sticky=tk.NW)
+            colors_menu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W, rowspan = 3)
             
         def changeLightColor(color):
             global selectedColor
@@ -49,9 +47,7 @@ class settingsPage(tk.Frame):
 
             # Hide volume menu
             volumeMenu.grid_remove()
-            redButton.grid_remove()
-            greenButton.grid_remove()
-            blueButton.grid_remove()
+            colors_menu.grid_remove()
 
             if not musicMenu.winfo_ismapped():
                 musicMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W)
@@ -100,9 +96,7 @@ class settingsPage(tk.Frame):
             introLabel['text'] = "Customize your Cactobot here!\nPress a button on the left to begin"
 
         def handleButtonClick(page):
-            redButton.grid_remove()
-            greenButton.grid_remove()
-            blueButton.grid_remove()
+            colors_menu.grid_remove()
             musicMenu.grid_remove()
             volumeMenu.grid_remove()
             controller.show_frame(page)
@@ -132,29 +126,31 @@ class settingsPage(tk.Frame):
         settingBtn.image = setting_icon
 
         #putting the colors buttons
+        colors_menu = ttk.Frame(self, style = 'audioMenu.TFrame')
         red_button_path = "images/red_circle.png"
         red_button_img = tk.PhotoImage(file=red_button_path)
         red_button_img = red_button_img.subsample(20)  # Adjust the subsample factor to resize the image
-
-        redButton = ttk.Button(self, text="RED", style='btn.TButton', image=red_button_img, compound=tk.CENTER,
+        redButton = ttk.Button(colors_menu, text="RED", style='btn.TButton', image=red_button_img, compound=tk.CENTER,
                                    command = lambda: changeLightColor("red"))
         redButton.image = red_button_img
+        redButton.pack(side=tk.LEFT)
         
         green_button_path = "images/green_circle.png"
         green_button_img = tk.PhotoImage(file=green_button_path)
         green_button_img = green_button_img.subsample(5)  # Adjust the subsample factor to resize the image
-
-        greenButton = ttk.Button(self, text="GREEN", style='btn.TButton', image=green_button_img, compound=tk.CENTER,
+        greenButton = ttk.Button(colors_menu, text="GREEN", style='btn.TButton', image=green_button_img, compound=tk.CENTER,
                                  command = lambda: changeLightColor("green"))
         greenButton.image = green_button_img
+        greenButton.pack(side=tk.LEFT)
 
         blue_button_path = "images/blue_circle.png"
         blue_button_img = tk.PhotoImage(file=blue_button_path)
-        blue_button_img = blue_button_img.subsample(9)  # Adjust the subsample factor to resize the image
+        blue_button_img = blue_button_img.subsample(5)  # Adjust the subsample factor to resize the image
 
-        blueButton = ttk.Button(self, text="BLUE", style='btn.TButton', image=blue_button_img, compound=tk.CENTER,
+        blueButton = ttk.Button(colors_menu, text="BLUE", style='btn.TButton', image=blue_button_img, compound=tk.CENTER,
                                 command = lambda: changeLightColor("blue"))
         blueButton.image = blue_button_img
+        blueButton.pack(side=tk.LEFT)
                 
 
         # settingBtn.grid(row = 0, column = 10, padx = 10, pady = 10, sticky = tk.NE)
