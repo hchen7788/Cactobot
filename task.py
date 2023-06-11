@@ -251,7 +251,7 @@ class tasksPage(tk.Frame):
         helpBtn.image = help_icon
 
         # put header text
-        label = ttk.Label(self, text ="Here are today's tasks", font = HEADERFONT,
+        label = ttk.Label(self, text ="TODAY'S TASKS", font = HEADERFONT,
                           width = 20, anchor="center", background = "#77A752")
         label.grid(row = 0, column = 1, padx = 10, pady = 10)
 

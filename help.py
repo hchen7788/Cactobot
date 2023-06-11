@@ -47,7 +47,7 @@ class helpPage(tk.Frame):
         helpBtn.grid(row = 2, column = 2, padx = 10, pady = 10, sticky=tk.SE)
 
         # label of header
-        label = ttk.Label(self, text ="Here's how to use your Catcobot",
+        label = ttk.Label(self, text ="HOW TO USE YOUR CACTOBOT",
                           font = LARGEFONT, background = "#77A752",
                           width = 37, anchor="center")
         # putting the grid in its place by using grid

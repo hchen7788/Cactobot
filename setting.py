@@ -96,7 +96,7 @@ class settingsPage(tk.Frame):
         
         # running program starts here
         tk.Frame.__init__(self, parent)
-        label = ttk.Label(self, text ="Settings", font = HEADERFONT,
+        label = ttk.Label(self, text ="SETTINGS", font = HEADERFONT,
                           width = 16, background = "#77A752", anchor="center")
         label.grid(row = 0, column = 1, padx = 10, pady = 10)
 
@@ -216,7 +216,7 @@ class settingsPage(tk.Frame):
 
         volumeLabel = ttk.Label(volumeMenu, text=f"Volume: {selectedVolumeLevel:.1f}",
                                 font=LARGEFONT, background = "#96BF76",
-                                width = 20, anchor = "center")
+                                width = 18, anchor = "center")
         volumeLabel.grid(row=0, column=0, padx=10, pady=10)
 
         incrementButton = ttk.Button(volumeMenu, text="Increase",
