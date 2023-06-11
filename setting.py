@@ -129,7 +129,7 @@ class settingsPage(tk.Frame):
         colors_menu = ttk.Frame(self, style = 'audioMenu.TFrame')
         red_button_path = "images/red_circle.png"
         red_button_img = tk.PhotoImage(file=red_button_path)
-        red_button_img = red_button_img.subsample(20)  # Adjust the subsample factor to resize the image
+        red_button_img = red_button_img.subsample(16)  # Adjust the subsample factor to resize the image
         redButton = ttk.Button(colors_menu, text="RED", style='btn.TButton', image=red_button_img, compound=tk.CENTER,
                                    command = lambda: changeLightColor("red"))
         redButton.image = red_button_img
@@ -137,7 +137,7 @@ class settingsPage(tk.Frame):
         
         green_button_path = "images/green_circle.png"
         green_button_img = tk.PhotoImage(file=green_button_path)
-        green_button_img = green_button_img.subsample(5)  # Adjust the subsample factor to resize the image
+        green_button_img = green_button_img.subsample(4)  # Adjust the subsample factor to resize the image
         greenButton = ttk.Button(colors_menu, text="GREEN", style='btn.TButton', image=green_button_img, compound=tk.CENTER,
                                  command = lambda: changeLightColor("green"))
         greenButton.image = green_button_img
@@ -145,7 +145,7 @@ class settingsPage(tk.Frame):
 
         blue_button_path = "images/blue_circle.png"
         blue_button_img = tk.PhotoImage(file=blue_button_path)
-        blue_button_img = blue_button_img.subsample(5)  # Adjust the subsample factor to resize the image
+        blue_button_img = blue_button_img.subsample(4)  # Adjust the subsample factor to resize the image
 
         blueButton = ttk.Button(colors_menu, text="BLUE", style='btn.TButton', image=blue_button_img, compound=tk.CENTER,
                                 command = lambda: changeLightColor("blue"))

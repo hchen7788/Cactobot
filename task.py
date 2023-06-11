@@ -8,6 +8,7 @@ from functools import partial
 import home
 import setting
 import help
+import time
 
 HEADERFONT = ("Verdana", 45)
 LARGEFONT =("Verdana", 35)
@@ -103,7 +104,6 @@ class tasksPage(tk.Frame):
                 #GPIO.output(GPIOBLUE, GPIO.HIGH)
                 print("d")
 
-
             # TODO: @TANIA @ ANNA send signal to output for one item checked
 
             # Task complete sound
@@ -119,6 +119,13 @@ class tasksPage(tk.Frame):
             clearScreen()
             displayList()
 
+            self.after(5000, dimLights)
+        
+        def dimLights():
+            #GPIO.output(GPIORED, GPIO.LOW)
+            #GPIO.output(GPIOGREEN, GPIO.LOW)
+            #GPIO.output(GPIOBLUE, GPIO.LOW)
+            print("Lights are now dimmed")
         
         def confirmEdit(i, entry):
             taskList[i] = (editInput.get(), taskList[i][1])
