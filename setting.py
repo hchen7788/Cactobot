@@ -5,13 +5,16 @@ import home
 import task
 import help
 
+import pygame as py
+from pygame import mixer
+
 HEADERFONT = ("Verdana", 45)
 LARGEFONT =("Verdana", 35)
 MEDIUMFONT =("Verdana", 25)
 SMALLFONT =("Verdana", 15)
 BTNFONT =("Verdana", 35)
 
-selectedMusicPath = "audio/Short_Success_Glockenspiel.mp3" # default is Short_Success_Glockenspiel.mp3
+selectedMusicPath = "audio/Complete.mp3" # default is Complete.mp3
 selectedVolumeLevel = 0.2 # default is 0.2
 
 # settings page window
@@ -52,6 +55,11 @@ class settingsPage(tk.Frame):
 
                 global selectedMusicPath
                 selectedMusicPath = musicPaths[index]
+
+                mixer.music.load(selectedMusicPath)
+                mixer.music.set_volume(selectedVolumeLevel)
+                mixer.music.play()
+
 
         def changeVolumeLevel():
             # TODO @ANNA
@@ -177,8 +185,12 @@ class settingsPage(tk.Frame):
         # music button clicked UI
         musicMenu = ttk.Frame(self, style = 'audioMenu.TFrame')
 
-        musicOptions = ["Deep Bell", "Short Success", "Success Trumpets"]
-        musicPaths = ["audio/Deep_Bell.mp3", "audio/Short_Success_Glockenspiel.mp3", "audio/Success_Trumpets.mp3"]
+        musicOptions = ["Air", "Bell Ringing", "Bright Jingle", "Complete", "Deep Bell", "Motion", "Rising Choir", 
+                        "Short Success", "Song", "Soothing", "Trumpets", "Twinkle", "Whoosh"]
+
+        musicPaths = ["audio/Air.mp3", "audio/Bell_Ringing.mp3", "audio/Bright_Jingle.mp3", "audio/Complete.mp3",
+                      "audio/Deep_Bell.mp3", "audio/Motion.mp3", "audio/Rising_Choir.mp3", "audio/Short_Success.mp3",
+                      "audio/Song.mp3", "audio/Soothing.mp3", "audio/Success_Trumpets.mp3","audio/Twinkle.mp3", "audio/Whoosh.mp3"]
 
         musicListbox = tk.Listbox(musicMenu, width=28, height = 7, selectmode=tk.SINGLE,
                                   background='#D9E9CD', font = MEDIUMFONT)
