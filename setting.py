@@ -15,8 +15,7 @@ class settingsPage(tk.Frame):
      
     def __init__(self, parent, controller):
          # of times taps have occurred
-        iterations = 0
-        #set led pin, can change later
+        self.iterations = 0
 
         # define GPIO mode
         GPIORED = 11  # red
@@ -28,25 +27,26 @@ class settingsPage(tk.Frame):
         GPIO.setup(GPIOBLUE, GPIO.OUT)
 
         # helpful functions
-        def changeLightColor():
-            if (iterations == 0):
+        def changeLightColor(self):
+            if (self.iterations == 0):
                 GPIO.output(GPIORED, 1)
                 GPIO.output(GPIOGREEN, 0)
                 GPIO.output(GPIOBLUE, 0)
+                self.iterations += 1
+                print(self.iterations)
                 print("red")
-                iterations = iterations + 1
-            elif (iterations == 1):
+            elif (self.iterations == 1):
                 GPIO.output(GPIORED, 0)
                 GPIO.output(GPIOGREEN, 1)
                 GPIO.output(GPIOBLUE, 0)
                 print("green")
-                iterations = iterations + 1
+                self.iterations += 1
             else:
                 GPIO.output(GPIORED, 0)
                 GPIO.output(GPIOGREEN, 0)
                 GPIO.output(GPIOBLUE, 1)
                 print("blue")
-                iterations = 0
+                self.iterations = 0
 
         def changeMusic():
             # TODO @ANNA
@@ -79,7 +79,7 @@ class settingsPage(tk.Frame):
 
 
         # lay out 3 settings button
-        lightBtn = ttk.Button(self, text = "Light Color", style = 'btn.TButton', command = changeLightColor)
+        lightBtn = ttk.Button(self, text = "Light Color", style = 'btn.TButton', command = lambda:changeLightColor(self))
         musicBtn = ttk.Button(self, text = "Music", style = 'btn.TButton', command = changeMusic)
         volumeBtn = ttk.Button(self, text = "Volume Level", style = 'btn.TButton', command = changeVolumeLevel)
         lightBtn.grid(row = 3, column = 1, padx = 10, pady = 10)

@@ -5,6 +5,7 @@ from functools import partial
 import home
 import setting
 import help
+import RPi.GPIO as GPIO
 
 LARGEFONT =("IBM Plex Sans Thai", 35)
 MEDIUMFONT =("IBM Plex Sans Thai", 25)
@@ -23,6 +24,14 @@ listCount = len(taskList)
 class tasksPage(tk.Frame):
 
     def __init__(self, parent, controller):
+        # define GPIO mode
+        GPIORED = 11  # red
+        GPIOGREEN = 13  # green
+        GPIOBLUE = 15  # blue
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(GPIORED, GPIO.OUT)
+        GPIO.setup(GPIOGREEN, GPIO.OUT)
+        GPIO.setup(GPIOBLUE, GPIO.OUT)
 
         # variables
         input = tk.StringVar()
@@ -50,12 +59,15 @@ class tasksPage(tk.Frame):
             checkCount += 1
 
             # TODO: @TANIA @ ANNA send signal to output for one item checked
+            GPIO.output(GPIORED, 1)
+            GPIO.output(GPIOGREEN, 1)
+            GPIO.output(GPIOBLUE, 0)
 
             taskList[i] = (taskList[i][0], "disabled")
             doneList[i].state(["disabled"])
             editList[i].state(["disabled"])
 
-            print("task ", taskList[i][0], " completed")
+            print("Task ", taskList[i][0], " has been completed.")
 
             clearScreen()
             displayList()
