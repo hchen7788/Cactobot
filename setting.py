@@ -108,7 +108,7 @@ class settingsPage(tk.Frame):
 
         def updateVolumeLabel():
             volumeLabel.config(text=f"Volume: {selectedVolumeLevel:.1f}")
-            introLabel['text'] = "Customize your Cactobot here!\nPress a button on the left to begin"
+            introLabel['text'] = "Set the volume of your Cactobot!"
 
         def handleButtonClick(page):
             colors_menu.grid_remove()
