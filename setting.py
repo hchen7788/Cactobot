@@ -28,7 +28,7 @@ class settingsPage(tk.Frame):
             musicMenu.grid_remove() 
             volumeMenu.grid_remove()
             print("Color buttons appearing")
-            colors_menu.grid(row=1, column=1, padx=10, pady=10, sticky=tk.W, rowspan = 3)
+            colors_menu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W, rowspan = 2)
 
         def changeLightColor(color):
             # TODO @TANIA
@@ -257,28 +257,41 @@ class settingsPage(tk.Frame):
         colors_menu = ttk.Frame(self, style = 'audioMenu.TFrame')
         red_button_path = "images/red_circle.png"
         red_button_img = tk.PhotoImage(file=red_button_path)
-        red_button_img = red_button_img.subsample(16)  # Adjust the subsample factor to resize the image 16
+        red_button_img = red_button_img.subsample(16)  # Adjust the subsample factor to resize the image 
         redButton = ttk.Button(colors_menu, text="RED", style='btn.TButton', image=red_button_img, compound=tk.CENTER,
                                    command = lambda: changeLightColor("red"))
         redButton.image = red_button_img
-        redButton.pack(side=tk.LEFT)
+        #redButton.pack(side=tk.LEFT)
+        redButton.grid(row = 0, column = 0)
         
         green_button_path = "images/green_circle.png"
         green_button_img = tk.PhotoImage(file=green_button_path)
-        green_button_img = green_button_img.subsample(4)  # Adjust the subsample factor to resize the image 4
+        green_button_img = green_button_img.subsample(4)  # Adjust the subsample factor to resize the image 
         greenButton = ttk.Button(colors_menu, text="GREEN", style='btn.TButton', image=green_button_img, compound=tk.CENTER,
                                  command = lambda: changeLightColor("green"))
         greenButton.image = green_button_img
-        greenButton.pack(side=tk.LEFT)
+       # greenButton.pack(side=tk.LEFT)
+        greenButton.grid(row = 0, column = 1)
 
         blue_button_path = "images/blue_circle.png"
         blue_button_img = tk.PhotoImage(file=blue_button_path)
-        blue_button_img = blue_button_img.subsample(4)  # Adjust the subsample factor to resize the image 4
+        blue_button_img = blue_button_img.subsample(4)  # Adjust the subsample factor to resize the image 
 
         blueButton = ttk.Button(colors_menu, text="BLUE", style='btn.TButton', image=blue_button_img, compound=tk.CENTER,
                                 command = lambda: changeLightColor("blue"))
         blueButton.image = blue_button_img
-        blueButton.pack(side=tk.LEFT)
+        #blueButton.pack(side=tk.LEFT)
+        blueButton.grid(row = 1, column = 0)
+
+        teal_button_path = "images/teal_circle.png"
+        teal_button_img = tk.PhotoImage(file=teal_button_path)
+        teal_button_img = teal_button_img.subsample(4)  # Adjust the subsample factor to resize the image
+
+        tealButton = ttk.Button(colors_menu, text="TEAL", style='btn.TButton', image=teal_button_img, compound=tk.CENTER,
+                                command = lambda: changeLightColor("blue"))
+        tealButton.image = teal_button_img
+        #tealButton.pack(side=tk.LEFT)
+        tealButton.grid(row = 1, column = 1)
 
 def getSelectedColor():
     return selectedColor
