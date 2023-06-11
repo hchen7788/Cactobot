@@ -151,6 +151,15 @@ class settingsPage(tk.Frame):
                                 command = lambda: changeLightColor("blue"))
         blueButton.image = blue_button_img
         blueButton.pack(side=tk.LEFT)
+
+        teal_button_path = "images/teal_circle.png"
+        teal_button_img = tk.PhotoImage(file=teal_button_path)
+        teal_button_img = teal_button_img.subsample(4)  # Adjust the subsample factor to resize the image
+
+        tealButton = ttk.Button(colors_menu, text="TEAL", style='btn.TButton', image=teal_button_img, compound=tk.CENTER,
+                                command = lambda: changeLightColor("blue"))
+        tealButton.image = teal_button_img
+        tealButton.pack(side=tk.LEFT)
                 
 
         # settingBtn.grid(row = 0, column = 10, padx = 10, pady = 10, sticky = tk.NE)

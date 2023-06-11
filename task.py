@@ -81,28 +81,31 @@ class tasksPage(tk.Frame):
             checkCount += 1
 
             #output selectedcolor
-            print("Light is now " + setting.selectedColor)
-            
             if (setting.selectedColor == "red"):
                 #GPIO.output(GPIORED, GPIO.HIGH)
                 #GPIO.output(GPIOGREEN, GPIO.LOW)
                 #GPIO.output(GPIOBLUE, GPIO.LOW)
-                print("a")
+                print("light is now red!")
             elif (setting.selectedColor == "green"):
                 #GPIO.output(GPIORED, GPIO.LOW)
                 #GPIO.output(GPIOGREEN, GPIO.HIGH)
                 #GPIO.output(GPIOBLUE, GPIO.LOW)
-                print("b")
+                print("light is now green!")
             elif (setting.selectedColor == "blue"):
                 #GPIO.output(GPIORED, GPIO.LOW)
                 #GPIO.output(GPIOGREEN, GPIO.LOW)
                 #GPIO.output(GPIOBLUE, GPIO.HIGH)
-                print("c")
+                print("light is now blue!")
+            elif (setting.selectedColor == "teal"):
+                #GPIO.output(GPIORED, GPIO.LOW)
+                #GPIO.output(GPIOGREEN, GPIO.HIGH)
+                #GPIO.output(GPIOBLUE, GPIO.HIGH)
+                print("light is now teal!")
             else:
                 #GPIO.output(GPIORED, GPIO.HIGH)
                 #GPIO.output(GPIOGREEN, GPIO.HIGH)
                 #GPIO.output(GPIOBLUE, GPIO.HIGH)
-                print("d")
+                print("light is not set up yet.")
 
             # TODO: @TANIA @ ANNA send signal to output for one item checked
 
