@@ -16,15 +16,34 @@ BTNFONT =("Verdana", 35)
 
 selectedMusicPath = "audio/Complete.mp3" # default is Complete.mp3
 selectedVolumeLevel = 0.2 # default is 0.2
+selectedColor = "white"
 
 # settings page window
 class settingsPage(tk.Frame):
      
     def __init__(self, parent, controller):
         # helpful functions
-        def changeLightColor():
+        def colorButtonsAppear():
+            introLabel['text'] = "Change the color of your Cactobot!"
+            musicMenu.grid_remove() 
+            volumeMenu.grid_remove()
+            print("Color buttons appearing")
+            colors_menu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W, rowspan = 2)
+
+        def changeLightColor(color):
             # TODO @TANIA
             print("change light color here")
+
+            global selectedColor
+            if (color == "red"):
+                selectedColor = "red"
+                print("red")
+            elif (color == "green"):
+                selectedColor = "green"
+                print("green")
+            else:
+                selectedColor = "blue"
+                print("blue")
 
             # Hide music + volume menu
             musicMenu.grid_remove() 
@@ -35,8 +54,9 @@ class settingsPage(tk.Frame):
             print("change music here")
             introLabel['text'] = "Pick a sound to celebrate\ncompleting a task!"
 
-            # Hide volume menu
+            # Hide volume + colors menu
             volumeMenu.grid_remove()
+            colors_menu.grid_remove()
 
             if not musicMenu.winfo_ismapped():
                 musicMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W)
@@ -66,8 +86,9 @@ class settingsPage(tk.Frame):
             print("change volume level here")
             introLabel['text'] = "Set the volume of your Cactobot!"
 
-            # Hide music menu
+            # Hide music + colors menu
             musicMenu.grid_remove()
+            colors_menu.grid_remove()
 
             if not volumeMenu.winfo_ismapped():
                 volumeMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W)
@@ -90,6 +111,7 @@ class settingsPage(tk.Frame):
             introLabel['text'] = "Customize your Cactobot here!\nPress a button on the left to begin"
 
         def handleButtonClick(page):
+            colors_menu.grid_remove()
             musicMenu.grid_remove()
             volumeMenu.grid_remove()
             controller.show_frame(page)
@@ -143,7 +165,7 @@ class settingsPage(tk.Frame):
         # #96BF76
 
         # lay out 3 settings button
-        lightBtn = ttk.Button(self, text = "Light Color", style = 'settingBtn.TButton', command = changeLightColor)
+        lightBtn = ttk.Button(self, text = "Light Color", style = 'settingBtn.TButton', command = colorButtonsAppear)
         musicBtn = ttk.Button(self, text = "Music", style = 'settingBtn.TButton', command = changeMusic)
         volumeBtn = ttk.Button(self, text = "Volume Level", style = 'settingBtn.TButton', command = changeVolumeLevel)
 
@@ -230,6 +252,49 @@ class settingsPage(tk.Frame):
         volumeMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W, rowspan = 3)
         volumeMenu.grid_remove()
 
+        ################################################
+        #putting the colors buttons
+        colors_menu = ttk.Frame(self, style = 'audioMenu.TFrame')
+        red_button_path = "images/red_circle.png"
+        red_button_img = tk.PhotoImage(file=red_button_path)
+        red_button_img = red_button_img.subsample(16)  # Adjust the subsample factor to resize the image 
+        redButton = ttk.Button(colors_menu, text="RED", style='btn.TButton', image=red_button_img, compound=tk.CENTER,
+                                   command = lambda: changeLightColor("red"))
+        redButton.image = red_button_img
+        #redButton.pack(side=tk.LEFT)
+        redButton.grid(row = 0, column = 0)
+        
+        green_button_path = "images/green_circle.png"
+        green_button_img = tk.PhotoImage(file=green_button_path)
+        green_button_img = green_button_img.subsample(4)  # Adjust the subsample factor to resize the image 
+        greenButton = ttk.Button(colors_menu, text="GREEN", style='btn.TButton', image=green_button_img, compound=tk.CENTER,
+                                 command = lambda: changeLightColor("green"))
+        greenButton.image = green_button_img
+       # greenButton.pack(side=tk.LEFT)
+        greenButton.grid(row = 0, column = 1)
+
+        blue_button_path = "images/blue_circle.png"
+        blue_button_img = tk.PhotoImage(file=blue_button_path)
+        blue_button_img = blue_button_img.subsample(4)  # Adjust the subsample factor to resize the image 
+
+        blueButton = ttk.Button(colors_menu, text="BLUE", style='btn.TButton', image=blue_button_img, compound=tk.CENTER,
+                                command = lambda: changeLightColor("blue"))
+        blueButton.image = blue_button_img
+        #blueButton.pack(side=tk.LEFT)
+        blueButton.grid(row = 1, column = 0)
+
+        teal_button_path = "images/teal_circle.png"
+        teal_button_img = tk.PhotoImage(file=teal_button_path)
+        teal_button_img = teal_button_img.subsample(4)  # Adjust the subsample factor to resize the image
+
+        tealButton = ttk.Button(colors_menu, text="TEAL", style='btn.TButton', image=teal_button_img, compound=tk.CENTER,
+                                command = lambda: changeLightColor("blue"))
+        tealButton.image = teal_button_img
+        #tealButton.pack(side=tk.LEFT)
+        tealButton.grid(row = 1, column = 1)
+
+def getSelectedColor():
+    return selectedColor
 
 def getSelectedMusicPath():
     return selectedMusicPath

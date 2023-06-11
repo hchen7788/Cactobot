@@ -5,9 +5,12 @@ from functools import partial
 import pygame as py
 from pygame import mixer
 
+# import RPi.GPIO as GPIO
+
 import home
 import setting
 import help
+import time
 
 HEADERFONT = ("Verdana", 45)
 LARGEFONT =("Verdana", 35)
@@ -22,12 +25,21 @@ doneList = []
 editList = []
 checkCount = 0
 listCount = len(taskList)
+color = "white"
 
 
 # tasks page window
 class tasksPage(tk.Frame):
 
     def __init__(self, parent, controller):
+        # define GPIO mode
+        # GPIORED = 17  # red
+        # GPIOGREEN = 27  # green
+        # GPIOBLUE = 22  # blue
+        # GPIO.setmode(GPIO.BCM)
+        # GPIO.setup(GPIORED, GPIO.OUT)
+        # GPIO.setup(GPIOGREEN, GPIO.OUT)
+        # GPIO.setup(GPIOBLUE, GPIO.OUT)
 
         # variables
         input = tk.StringVar()
@@ -76,6 +88,33 @@ class tasksPage(tk.Frame):
             #soundPath = 'audio/Short_Success_Glockenspiel.mp3'
             playSound()
 
+            #output selected color
+            if (setting.selectedColor == "red"):
+                #GPIO.output(GPIORED, GPIO.HIGH)
+                #GPIO.output(GPIOGREEN, GPIO.LOW)
+                #GPIO.output(GPIOBLUE, GPIO.LOW)
+                print("light is now red!")
+            elif (setting.selectedColor == "green"):
+                #GPIO.output(GPIORED, GPIO.LOW)
+                #GPIO.output(GPIOGREEN, GPIO.HIGH)
+                #GPIO.output(GPIOBLUE, GPIO.LOW)
+                print("light is now green!")
+            elif (setting.selectedColor == "blue"):
+                #GPIO.output(GPIORED, GPIO.LOW)
+                #GPIO.output(GPIOGREEN, GPIO.LOW)
+                #GPIO.output(GPIOBLUE, GPIO.HIGH)
+                print("light is now blue!")
+            elif (setting.selectedColor == "teal"):
+                #GPIO.output(GPIORED, GPIO.LOW)
+                #GPIO.output(GPIOGREEN, GPIO.HIGH)
+                #GPIO.output(GPIOBLUE, GPIO.HIGH)
+                print("light is now teal!")
+            else:
+                #GPIO.output(GPIORED, GPIO.HIGH)
+                #GPIO.output(GPIOGREEN, GPIO.HIGH)
+                #GPIO.output(GPIOBLUE, GPIO.HIGH)
+                print("light is not set up yet.")
+
             taskList[i] = (taskList[i][0], "disabled")
             doneList[i].state(["disabled"])
             editList[i].state(["disabled"])
@@ -84,6 +123,14 @@ class tasksPage(tk.Frame):
 
             clearScreen()
             displayList()
+
+            self.after(5000, dimLights)
+
+        def dimLights():
+            #GPIO.output(GPIORED, GPIO.LOW)
+            #GPIO.output(GPIOGREEN, GPIO.LOW)
+            #GPIO.output(GPIOBLUE, GPIO.LOW)
+            print("Lights are now dimmed")
 
         
         def confirmEdit(i, entry):
