@@ -5,6 +5,8 @@ from functools import partial
 import pygame as py
 from pygame import mixer
 
+# import RPi.GPIO as GPIO
+
 import home
 import setting
 import help
@@ -22,12 +24,21 @@ doneList = []
 editList = []
 checkCount = 0
 listCount = len(taskList)
+color = "white"
 
 
 # tasks page window
 class tasksPage(tk.Frame):
 
     def __init__(self, parent, controller):
+        # define GPIO mode
+        # GPIORED = 17  # red
+        # GPIOGREEN = 27  # green
+        # GPIOBLUE = 22  # blue
+        # GPIO.setmode(GPIO.BCM)
+        # GPIO.setup(GPIORED, GPIO.OUT)
+        # GPIO.setup(GPIOGREEN, GPIO.OUT)
+        # GPIO.setup(GPIOBLUE, GPIO.OUT)
 
         # variables
         input = tk.StringVar()
@@ -75,6 +86,30 @@ class tasksPage(tk.Frame):
             # Task complete sound
             #soundPath = 'audio/Short_Success_Glockenspiel.mp3'
             playSound()
+
+            #output selected color
+            print("Light is now " + setting.selectedColor)
+            
+            if (setting.selectedColor == "red"):
+                #GPIO.output(GPIORED, GPIO.HIGH)
+                #GPIO.output(GPIOGREEN, GPIO.LOW)
+                #GPIO.output(GPIOBLUE, GPIO.LOW)
+                print("a")
+            elif (setting.selectedColor == "green"):
+                #GPIO.output(GPIORED, GPIO.LOW)
+                #GPIO.output(GPIOGREEN, GPIO.HIGH)
+                #GPIO.output(GPIOBLUE, GPIO.LOW)
+                print("b")
+            elif (setting.selectedColor == "blue"):
+                #GPIO.output(GPIORED, GPIO.LOW)
+                #GPIO.output(GPIOGREEN, GPIO.LOW)
+                #GPIO.output(GPIOBLUE, GPIO.HIGH)
+                print("c")
+            else:
+                #GPIO.output(GPIORED, GPIO.HIGH)
+                #GPIO.output(GPIOGREEN, GPIO.HIGH)
+                #GPIO.output(GPIOBLUE, GPIO.HIGH)
+                print("d")
 
             taskList[i] = (taskList[i][0], "disabled")
             doneList[i].state(["disabled"])
