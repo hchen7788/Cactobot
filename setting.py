@@ -8,9 +8,9 @@ import help
 import pygame as py
 from pygame import mixer
 
-HEADERFONT = ("Verdana", 45)
-LARGEFONT =("Verdana", 35)
-MEDIUMFONT =("Verdana", 25)
+HEADERFONT = ("Verdana", 42)
+LARGEFONT =("Verdana", 33)
+MEDIUMFONT =("Verdana", 23)
 SMALLFONT =("Verdana", 15)
 BTNFONT =("Verdana", 35)
 
@@ -28,7 +28,7 @@ class settingsPage(tk.Frame):
             musicMenu.grid_remove() 
             volumeMenu.grid_remove()
             print("Color buttons appearing")
-            colors_menu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W, rowspan = 2)
+            colors_menu.grid(row=2, column=1, sticky=tk.W, rowspan = 2)
 
         def changeLightColor(color):
             # TODO @TANIA
@@ -59,7 +59,7 @@ class settingsPage(tk.Frame):
             colors_menu.grid_remove()
 
             if not musicMenu.winfo_ismapped():
-                musicMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W)
+                musicMenu.grid(row=2, column=1, sticky=tk.W)
             else:
                 musicMenu.grid_remove()
                 introLabel['text'] = "Customize your Cactobot here!\nPress a button on the left to begin"
@@ -91,7 +91,7 @@ class settingsPage(tk.Frame):
             colors_menu.grid_remove()
 
             if not volumeMenu.winfo_ismapped():
-                volumeMenu.grid(row=2, column=1, padx=10, pady=10, sticky=tk.W)
+                volumeMenu.grid(row=2, column=1, sticky=tk.W)
             else:
                 volumeMenu.grid_remove()
                 introLabel['text'] = "Customize your Cactobot here!\nPress a button on the left to begin"
@@ -119,11 +119,11 @@ class settingsPage(tk.Frame):
         # running program starts here
         tk.Frame.__init__(self, parent)
         label = ttk.Label(self, text ="SETTINGS", font = HEADERFONT,
-                          width = 16, background = "#77A752", anchor="center")
-        label.grid(row = 0, column = 1, padx = 10, pady = 10)
+                          width = 13, background = "#77A752", anchor="center")
+        label.grid(row = 0, column = 1)
 
         padding_right = ttk.Label(self, text ="", font = LARGEFONT,
-                          width = 7, background = "#77A752", anchor="center")
+                          width = 3, background = "#77A752", anchor="center")
         padding_right.grid(row = 0, column = 2, padx = 10, pady = 10)
   
         # putting the home and settings button
@@ -140,7 +140,7 @@ class settingsPage(tk.Frame):
                                 command = lambda : controller.show_frame(settingsPage))
         settingBtn.image = setting_icon
         # settingBtn.grid(row = 0, column = 10, padx = 10, pady = 10, sticky = tk.NE)
-        settingBtn.grid(row = 0, column = 3, padx = 10, pady = 10, sticky = tk.NE)
+        settingBtn.grid(row = 0, column = 2, padx = 10, pady = 10, sticky = tk.NE)
 
         task_icon_path = "images/task_icon.png"
         task_icon = tk.PhotoImage(file = task_icon_path)
@@ -156,12 +156,12 @@ class settingsPage(tk.Frame):
                              command = lambda: handleButtonClick(help.helpPage))
         helpBtn.image = help_icon
 
-        helpBtn.grid(row = 5, column = 3, padx = 10, pady = 10, sticky=tk.SE)
+        helpBtn.grid(row = 5, column = 2, padx = 10, pady = 10, sticky=tk.SE)
 
         settingBtnStyle = ttk.Style()
         settingBtnStyle.theme_use('classic')
         settingBtnStyle.configure('settingBtn.TButton', foreground = "black", background = "#D9E9CD",
-                           highlightthickness = 0, width = 15, borderwidth = 0, font = MEDIUMFONT)
+                           highlightthickness = 0, width = 13, borderwidth = 0, font = MEDIUMFONT)
         # #96BF76
 
         # lay out 3 settings button
@@ -192,17 +192,17 @@ class settingsPage(tk.Frame):
         introLabel.grid(row = 1, column = 1, padx = 10, pady = 10)
 
         # dummy padding bottom
-        dummyStyle = ttk.Style()
-        dummyStyle.configure('dummyLabel.TLabel', background = "#77A752", foreground = "#77A752")
-        dummyLabel1 = ttk.Label(self, text = "x\nx\nx\nx\nx\nx\nx\n",
-                               style = "dummyLabel.TLabel")
-        dummyLabel1.grid(row = 1, column = 2, padx = 10, pady = 10, sticky=tk.E)
-        dummyLabel2 = ttk.Label(self, text = "x\nx\nx\nx\nx\nx\nx\nx",
-                               style = "dummyLabel.TLabel")
-        dummyLabel2.grid(row = 2, column = 2, padx = 10, pady = 10, sticky=tk.E)
-        dummyLabel3 = ttk.Label(self, text = "x\nx\nx\nx\nx\nx\nx\nx",
-                               style = "dummyLabel.TLabel")
-        dummyLabel3.grid(row = 3, column = 2, padx = 10, pady = 10, sticky=tk.E)
+        # dummyStyle = ttk.Style()
+        # dummyStyle.configure('dummyLabel.TLabel', background = "#77A752", foreground = "#77A752")
+        # dummyLabel1 = ttk.Label(self, text = "x\nx\nx\nx\nx\nx\nx\n",
+        #                        style = "dummyLabel.TLabel")
+        # dummyLabel1.grid(row = 1, column = 2, padx = 10, pady = 10, sticky=tk.E)
+        # dummyLabel2 = ttk.Label(self, text = "x\nx\nx\nx\nx\nx\nx\nx",
+        #                        style = "dummyLabel.TLabel")
+        # dummyLabel2.grid(row = 2, column = 2, padx = 10, pady = 10, sticky=tk.E)
+        # dummyLabel3 = ttk.Label(self, text = "x\nx\nx\nx\nx\nx\nx\nx",
+        #                        style = "dummyLabel.TLabel")
+        # dummyLabel3.grid(row = 3, column = 2, padx = 10, pady = 10, sticky=tk.E)
 
         # music button clicked UI
         musicMenu = ttk.Frame(self, style = 'audioMenu.TFrame')
@@ -214,7 +214,7 @@ class settingsPage(tk.Frame):
                       "audio/Deep_Bell.mp3", "audio/Motion.mp3", "audio/Rising_Choir.mp3", "audio/Short_Success.mp3",
                       "audio/Song.mp3", "audio/Soothing.mp3", "audio/Success_Trumpets.mp3","audio/Twinkle.mp3", "audio/Whoosh.mp3"]
 
-        musicListbox = tk.Listbox(musicMenu, width=28, height = 7, selectmode=tk.SINGLE,
+        musicListbox = tk.Listbox(musicMenu, width=28, height = 6, selectmode=tk.SINGLE,
                                   background='#D9E9CD', font = MEDIUMFONT)
         scrollbar = tk.Scrollbar(musicMenu, orient=tk.VERTICAL, command=musicListbox.yview)
         musicListbox.config(yscrollcommand=scrollbar.set)
@@ -257,7 +257,7 @@ class settingsPage(tk.Frame):
         colors_menu = ttk.Frame(self, style = 'audioMenu.TFrame')
         red_button_path = "images/red_circle.png"
         red_button_img = tk.PhotoImage(file=red_button_path)
-        red_button_img = red_button_img.subsample(16)  # Adjust the subsample factor to resize the image 
+        red_button_img = red_button_img.subsample(20)  # Adjust the subsample factor to resize the image 
         redButton = ttk.Button(colors_menu, text="RED", style='btn.TButton', image=red_button_img, compound=tk.CENTER,
                                    command = lambda: changeLightColor("red"))
         redButton.image = red_button_img
@@ -266,7 +266,7 @@ class settingsPage(tk.Frame):
         
         green_button_path = "images/green_circle.png"
         green_button_img = tk.PhotoImage(file=green_button_path)
-        green_button_img = green_button_img.subsample(4)  # Adjust the subsample factor to resize the image 
+        green_button_img = green_button_img.subsample(5)  # Adjust the subsample factor to resize the image 
         greenButton = ttk.Button(colors_menu, text="GREEN", style='btn.TButton', image=green_button_img, compound=tk.CENTER,
                                  command = lambda: changeLightColor("green"))
         greenButton.image = green_button_img
@@ -275,7 +275,7 @@ class settingsPage(tk.Frame):
 
         blue_button_path = "images/blue_circle.png"
         blue_button_img = tk.PhotoImage(file=blue_button_path)
-        blue_button_img = blue_button_img.subsample(4)  # Adjust the subsample factor to resize the image 
+        blue_button_img = blue_button_img.subsample(5)  # Adjust the subsample factor to resize the image 
 
         blueButton = ttk.Button(colors_menu, text="BLUE", style='btn.TButton', image=blue_button_img, compound=tk.CENTER,
                                 command = lambda: changeLightColor("blue"))
@@ -285,7 +285,7 @@ class settingsPage(tk.Frame):
 
         teal_button_path = "images/teal_circle.png"
         teal_button_img = tk.PhotoImage(file=teal_button_path)
-        teal_button_img = teal_button_img.subsample(4)  # Adjust the subsample factor to resize the image
+        teal_button_img = teal_button_img.subsample(5)  # Adjust the subsample factor to resize the image
 
         tealButton = ttk.Button(colors_menu, text="TEAL", style='btn.TButton', image=teal_button_img, compound=tk.CENTER,
                                 command = lambda: changeLightColor("blue"))

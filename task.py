@@ -12,8 +12,8 @@ import setting
 import help
 import time
 
-HEADERFONT = ("Verdana", 45)
-LARGEFONT =("Verdana", 35)
+HEADERFONT = ("Verdana", 40)
+LARGEFONT =("Verdana", 30)
 MEDIUMFONT =("Verdana", 25)
 SMALLFONT =("Verdana", 15)
 BTNFONT =("Verdana", 35)
@@ -49,7 +49,7 @@ class tasksPage(tk.Frame):
         labelStyle = ttk.Style()
         labelStyle.theme_use('classic')
         labelStyle.configure('task.TLabel', foreground = "white", background="#B8906A",
-                             height = 15, width = 28, font = LARGEFONT)
+                             height = 10, width = 20, font = LARGEFONT)
         
         btnStyle = ttk.Style()
         btnStyle.configure('btn.TButton', foreground = "black", background = "#77A752", borderwidth=0)
@@ -222,7 +222,7 @@ class tasksPage(tk.Frame):
                 deleteBtn = ttk.Button(self, text = "-", image = delete_icon,
                                        style = "btn.TButton", command = partial(deleteItem, r - 2))
                 deleteBtn.image = delete_icon
-                deleteBtn.grid(row = r, column = 3, padx = 10, pady = 10)
+                deleteBtn.grid(row = r, column = 3)
                 deleteList.append(deleteBtn)
 
                 r += 1
@@ -232,7 +232,7 @@ class tasksPage(tk.Frame):
             # TODO: screenkeyboard when clicked on entry
             addBtn.grid(row = listCount + 2, column = 2)
             imageLabel.grid(row = listCount + 2, column = 0, sticky = tk.SW, padx = 10, pady = 0)
-            helpBtn.grid(row = listCount + 2, column = 5, padx = 10, pady = 10, sticky=tk.SE)
+            helpBtn.grid(row = listCount + 2, column = 4, sticky=tk.SE)
 
             if(checkCount == listCount):
                 # TODO: @TANIA @ANNA send signal to output for all items checked
@@ -288,7 +288,7 @@ class tasksPage(tk.Frame):
         settingBtn = ttk.Button(self, text ="SETTINGS", style = 'btn.TButton', image = setting_icon,
                                 command = lambda : controller.show_frame(setting.settingsPage))
         settingBtn.image = setting_icon
-        settingBtn.grid(row = 0, column = 5, padx = 10, pady = 10, sticky = tk.NE)
+        settingBtn.grid(row = 0, column = 4, sticky = tk.NE)
 
         # putting help button to link to help page
         help_icon_path = "images/help_icon.png"
