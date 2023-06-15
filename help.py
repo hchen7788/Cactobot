@@ -11,12 +11,12 @@ MEDIUMFONT =("Verdana", 20)
 SMALLFONT =("Verdana", 15)
 BTNFONT =("Verdana", 35)
 
-# first window frame startpage
+# Help Page -- gives instructions on how to use the Cactobot and its different features
 class helpPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        # putting the home and settings button
+        # Placing the home button that links to home page
         home_icon_path = "images/home_icon.png"
         home_icon = tk.PhotoImage(file = home_icon_path)
         homeBtn = ttk.Button(self, text="HOME", style = 'btn.TButton', image = home_icon,
@@ -24,6 +24,7 @@ class helpPage(tk.Frame):
         homeBtn.image = home_icon
         homeBtn.grid(row = 0, column = 0, sticky = tk.NW)
 
+        # Placing the setting button that links to setting page
         setting_icon_path = "images/setting_icon.png"
         setting_icon = tk.PhotoImage(file = setting_icon_path)
         settingBtn = ttk.Button(self, text ="SETTINGS", style = 'btn.TButton', image = setting_icon,
@@ -31,6 +32,7 @@ class helpPage(tk.Frame):
         settingBtn.image = setting_icon
         settingBtn.grid(row = 0, column = 2, sticky = tk.NE)
 
+        # Placing the task button that links to task page
         task_icon_path = "images/task_icon.png"
         task_icon = tk.PhotoImage(file = task_icon_path)
         taskBtn = ttk.Button(self, text ="TASK", style = 'btn.TButton', image = task_icon,
@@ -38,7 +40,7 @@ class helpPage(tk.Frame):
         taskBtn.image = task_icon
         taskBtn.grid(row = 2, column = 0, sticky = tk.SW)
 
-        # putting help button to link to help page
+        # Placing the help button that links to help page
         help_icon_path = "images/help_icon.png"
         help_icon = tk.PhotoImage(file = help_icon_path)
         helpBtn = ttk.Button(self, text = "HELP", style = 'btn.TButton', image = help_icon, 
